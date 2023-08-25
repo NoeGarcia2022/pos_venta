@@ -37,7 +37,7 @@ class Conectar
 $obj = new Conectar();
 try {
     $conexion = $obj->conexion();
-    echo "Conexion exitosa con nuestra bd";
+    //echo "Conexion exitosa con nuestra bd";
 } catch (ConexionException $e) {
     echo "Error de conexión: " . $e->getMessage();
 }
