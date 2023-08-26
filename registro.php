@@ -1,3 +1,27 @@
+<?php
+// Requerimos el archivo que contiene la clase de conexión
+require_once("clases/Conexion.php");
+
+// Creamos una instancia de la clase Conectar para establecer la conexión
+$obj = new Conectar();
+$conexion = $obj->conexion();
+
+// Consulta SQL para verificar si el usuario "admin" ya existe en la base de datos
+$sql = "SELECT * FROM tb_usuarios WHERE correo='admin'";
+
+// Ejecutamos la consulta en la base de datos
+$result = mysqli_query($conexion, $sql);
+
+// Inicializamos una variable de validación en 0
+$validar = 0;
+
+// Verificamos si existen filas en el resultado de la consulta
+if (mysqli_num_rows($result) > 0) {
+    // Si hay filas, redirigimos al usuario a la página de inicio (index.php)
+    header("Location:index.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +46,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title text-center">Registro de Administrador</h4>
-                    <div id="alertMessage" class="alert" style="display: none;"></div>
+                    <div id="alertMessage" class="alert text-center" style="display: none;"></div>
                     <hr>
                     <!-- Centrar la imagen -->
                     <div class="center-image text-center">
@@ -83,11 +107,11 @@
                 success: function(r) {
                     if (r.trim() === "1") {
                         // Mostrar alerta verde en caso de éxito y limpiar el formulario
-                        mostrarAlerta('Agregado con éxito', 'success');
+                        mostrarAlerta('Usuario Admin Registrado', 'success');
                         $('#frmRegistro')[0].reset(); // Limpia los campos del formulario
                     } else {
                         // Mostrar alerta roja en caso de falla
-                        mostrarAlerta('Fallo al agregar', 'danger');
+                        mostrarAlerta('Fallo al Registrar Admin', 'danger');
                     }
                 }
             });
