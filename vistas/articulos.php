@@ -66,7 +66,7 @@ if (isset($_SESSION['usuario'])) {
                     </form>
                 </div>
                 <div class="col-sm-8">
-                    <!-- Espacio para mostrar la tabla de categorías cargada dinámicamente -->
+                    <!-- Espacio para mostrar la tabla de articulos cargada dinámicamente -->
                     <div id="tablaArticuloLoad">
                     </div>
                 </div>
@@ -78,7 +78,7 @@ if (isset($_SESSION['usuario'])) {
 
     <script type="text/javascript">
         $(document).ready(function() {
-            // Cargar la tabla de categorías al cargar la página
+            // Cargar la tabla de articulo al cargar la página
             $('#tablaArticuloLoad').load("articulos/tablaArticulos.php");
 
             // Acción al hacer clic en el botón "Agregar"
@@ -101,10 +101,11 @@ if (isset($_SESSION['usuario'])) {
                     url: "../procesos/articulos/agregaArticulo.php",
                     success: function(r) {
                         if (r == 1) {
-                            // Mostrar una alerta de éxito si la categoría se agregó correctamente
+                            // Mostrar una alerta de éxito si el articulo se agregó correctamente
+                            $('#tablaArticuloLoad').load("articulos/tablaArticulos.php");
                             alertify.success("Producto agregado con éxito");
                         } else {
-                            // Mostrar una alerta de error si no se pudo registrar la categoría
+                            // Mostrar una alerta de error si no se pudo registrar el articulo
                             alertify.error("No se registró el producto");
                         }
                     }
