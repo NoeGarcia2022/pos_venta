@@ -5,6 +5,11 @@
         <!-- Encabezado de la tabla -->
         <thead class="table-dark">
             <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Imagen</th>
                 <th scope="col">Categoría</th>
                 <th scope="col">Acciones</th>
             </tr>
@@ -12,7 +17,12 @@
         <tbody>
             <!-- Ejemplo de una fila de categoría (puedes repetir esta estructura dinámicamente) -->
             <tr>
-                <td scope="row">Nombre de la Categoría</td>
+                <td scope="row"></td>
+                <td scope="row"></td>
+                <td scope="row"></td>
+                <td scope="row"></td>
+                <td scope="row"></td>
+                <td scope="row"></td>
                 <td scope="row">
                     <!-- Botones de edición y eliminación con iconos -->
                     <button type="button" class="btn btn-outline-success"><i class="fas fa-pencil-alt"></i></button>

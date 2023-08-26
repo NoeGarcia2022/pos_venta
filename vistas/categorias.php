@@ -27,6 +27,9 @@ if (isset($_SESSION['usuario'])) {
     </header>
 
     <body>
+        <div class="container-fluid mt-3">
+            <h1 class="text-center bg-warning">CATEGORIAS</h1>
+        </div>
         <!-- Contenedor principal -->
         <div class="container mt-5">
             <div class="row">
