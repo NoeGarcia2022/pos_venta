@@ -29,37 +29,37 @@
                 <ul class="navbar-nav">
                     <!-- Elemento de menú: Inicio -->
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline-danger btn-sm mx-1" href="#">
+                        <a class="nav-link btn btn-outline-danger btn-sm mx-1 <?php if ($currentPage == 'inicio') echo 'active'; ?>" href="../vistas/inicio.php">
                             <i class="fas fa-home fa-2xs"></i> Inicio
                         </a>
                     </li>
                     <!-- Elemento de menú: Productos -->
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline-danger btn-sm mx-1" href="#">
+                        <a class="nav-link btn btn-outline-danger btn-sm mx-1 <?php if ($currentPage == 'productos') echo 'active'; ?>" href="../vistas/articulos.php">
                             <i class="fa-solid fa-table-list fa-2xs"></i> Productos
                         </a>
                     </li>
                     <!-- Elemento de menú: Categorías -->
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline-danger btn-sm mx-1" href="#">
+                        <a class="nav-link btn btn-outline-danger btn-sm mx-1 <?php if ($currentPage == 'categorias') echo 'active'; ?>" href="../vistas/categorias.php">
                             <i class="fa-solid fa-table-list fa-2xs"></i> Categorias
                         </a>
                     </li>
                     <!-- Elemento de menú: Administrar Usuarios -->
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline-danger btn-sm mx-1" href="#">
+                        <a class="nav-link btn btn-outline-danger btn-sm mx-1 <?php if ($currentPage == 'usuarios') echo 'active'; ?>" href="../vistas/usuarios.php">
                             <i class="fa-solid fa-users-gear fa-2xs"></i> Administrar Usuarios
                         </a>
                     </li>
                     <!-- Elemento de menú: Clientes -->
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline-danger btn-sm mx-1" href="#">
+                        <a class="nav-link btn btn-outline-danger btn-sm mx-1 <?php if ($currentPage == 'clientes') echo 'active'; ?>" href="../vistas/clientes.php">
                             <i class="fa-solid fa-users-between-lines fa-2xs"></i> Clientes
                         </a>
                     </li>
                     <!-- Elemento de menú: Vender Artículo -->
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline-danger btn-sm mx-1" href="#">
+                        <a class="nav-link btn btn-outline-danger btn-sm mx-1 <?php if ($currentPage == 'ventas') echo 'active'; ?>" href="../vistas/ventas.php">
                             <i class="fas fa-tag me-2 fa-2xs"></i>Vender Articulo
                         </a>
                     </li>

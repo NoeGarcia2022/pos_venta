@@ -6,6 +6,7 @@ session_start();
 if (isset($_SESSION['usuario'])) {
     // Si la variable de sesión 'usuario' existe, la mostramos
     //echo $_SESSION['usuario'];
+    $currentPage = "inicio"; // Cambia "inicio" por el nombre de la página actual
 ?>
 
     <!DOCTYPE html>

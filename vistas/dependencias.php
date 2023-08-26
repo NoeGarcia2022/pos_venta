@@ -35,3 +35,6 @@
 
 <!-- Script(s) de una librería de Font Awesome especificada -->
 <script src="../librerias/all.min.js"></script>
+
+<!-- Script que contiene mis funciones -->
+<script src="../js/funciones.js"></script>
