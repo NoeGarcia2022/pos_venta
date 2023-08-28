@@ -27,4 +27,16 @@ class Categorias
 
         echo mysqli_query($conexion, $sql);
     }
+
+    // Funcion o metodo para eliminar categoria
+    public function eliminaCategoria($idcategoria)
+    {
+        $c = new Conectar();
+        $conexion = $c->conexion();
+
+        // Sentencia sql para poder actualizar los datos 
+        $sql = "DELETE FROM tb_categorias WHERE id_categoria='$idcategoria'";
+
+        return mysqli_query($conexion, $sql);
+    }
 }

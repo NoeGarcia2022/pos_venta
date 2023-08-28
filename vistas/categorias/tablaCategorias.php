@@ -35,7 +35,7 @@
                     <td scope="row">
                         <!-- Botones de edición y eliminación con iconos -->
                         <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#actualizarCategoria" onclick="agregaDato('<?php echo $resultado['id_categoria'] ?>', '<?php echo $resultado['nombreCategoria'] ?>' )"><i class="fas fa-pencil-alt"></i></button>
-                        <button type="button" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" onclick="eliminaCategoria('<?php echo $resultado['id_categoria'] ?>')" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                     </td>
                 </tr>
                 <!-- Fin del ejemplo de fila -->

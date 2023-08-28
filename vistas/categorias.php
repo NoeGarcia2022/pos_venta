@@ -168,6 +168,31 @@ if (isset($_SESSION['usuario'])) {
             $('#idcategoriaU').val(idCategoria);
             $('#categoriaU').val(categoria);
         }
+
+        // funcion para eliminar una categoria
+        function eliminaCategoria(idcategoriaU) {
+            alertify.confirm('¿Desea eliminar esta categoria?',
+                function() {
+                    $.ajax({
+                        type: "POST",
+                        data: "idcategoriaU=" + idcategoriaU,
+                        url: "../procesos/categorias/eliminarCategoria.php",
+                        success: function(r) {
+                            if (r == 1) {
+                                // Mostrar una alerta y recargar tabla si se elimino categoría correctamente
+                                $('#tablaCategoriaLoad').load("categorias/tablaCategorias.php");
+                                alertify.success("Categoria Eliminada")
+                            } else {
+                                // Mostrar una alerta de error si no se pudo aliminar la categoría
+                                alertify.error("No se alimino la categoría");
+                            }
+                        }
+                    });
+                },
+                function() {
+                    alertify.error('Cancelo !')
+                });
+        }
     </script>
 
 
