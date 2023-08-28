@@ -33,6 +33,8 @@ if (isset($_SESSION['usuario'])) {
                 <div class="col-sm-4 mt-4">
                     <!-- Formulario para agregar usuarios -->
                     <form id="frmUsuarios" action="" method="post" class="form-control" enctype="multipart/form-data">
+                    <h3>Formulario Usuarios</h3>
+                        <hr>
                         <div class="mb-2">
                             <label for="nombre" class="form-label">Nombres</label>
                             <input type="text" class="form-control form-control-sm" id="nombre" name="nombre">
@@ -41,11 +43,11 @@ if (isset($_SESSION['usuario'])) {
                             <label for="apellidos" class="form-label">Apellidos</label>
                             <input type="text" class="form-control form-control-sm" id="apellidos" name="apellidos">
                         </div>
-                        <div class="mb-2">
+                        <div class="">
                             <label for="correo" class="form-label">Usuario</label>
                             <input type="email" class="form-control form-control-sm" id="correo" name="correo">
                         </div>
-                        <div class="mb-2">
+                        <div class="">
                             <label for="clave" class="form-label">Contraseña</label>
                             <input type="password" class="form-control form-control-sm" id="clave" name="clave">
                         </div>

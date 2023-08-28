@@ -36,6 +36,8 @@ if (isset($_SESSION['usuario'])) {
                 <div class="col-sm-4 mt-4">
                     <!-- Formulario para agregar categorías -->
                     <form id="frmCategorias" action="" method="post" class="form-control">
+                        <h3>Formulario Categorias</h3>
+                        <hr>
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Categoria</label>
                             <input type="text" class="form-control input-group-sm" id="categoria" name="categoria">
@@ -82,6 +84,8 @@ if (isset($_SESSION['usuario'])) {
                     url: "../procesos/categorias/agregaCategoria.php",
                     success: function(r) {
                         if (r == 1) {
+                            // limpiar formulario al insertar un registro
+                            $('#frmCategorias')[0].reset();
                             // Mostrar una alerta de éxito si la categoría se agregó correctamente
                             $('#tablaCategoriaLoad').load("categorias/tablaCategorias.php");
                             alertify.success("Categoría agregada con éxito");

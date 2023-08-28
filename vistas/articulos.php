@@ -35,13 +35,15 @@ if (isset($_SESSION['usuario'])) {
                 <div class="col-sm-4 mt-4">
                     <!-- Formulario para agregar productos -->
                     <form id="frmArticulos" action="" method="post" class="form-control" enctype="multipart/form-data">
+                        <h3>Formulario Productos</h3>
+                        <hr>
                         <div class="mb-2">
                             <label for="" class="form-label">Categoria</label>
                             <select class="form-select form-select-sm" name="categoriaSelect" id="categoriaSelect">
                                 <option selected value="A" disabled>Seleccione una categoria</option>
                             </select>
                         </div>
-                        <div class="mb-2">
+                        <div class="">
                             <label for="nombre" class="form-label">Nombre</label>
                             <input type="text" class="form-control form-control-sm" id="nombre" name="nombre">
                         </div>
@@ -49,15 +51,15 @@ if (isset($_SESSION['usuario'])) {
                             <label for="descripcion" class="form-label">Descripcion</label>
                             <input type="text" class="form-control form-control-sm" id="descripcion" name="descripcion">
                         </div>
-                        <div class="mb-2">
+                        <div class="">
                             <label for="cantidad" class="form-label">Cantidad</label>
                             <input type="text" class="form-control form-control-sm" id="cantidad" name="cantidad">
                         </div>
-                        <div class="mb-2">
+                        <div class="">
                             <label for="precio" class="form-label">Precio</label>
                             <input type="text" class="form-control form-control-sm" id="precio" name="precio">
                         </div>
-                        <div class="mb-2">
+                        <div class="mt-2">
                             <input type="file" class="form-control input-group-sm" id="imagen" name="imagen">
                         </div>
                         <div class="mt-2">

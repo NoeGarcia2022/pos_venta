@@ -15,8 +15,8 @@
                 <td scope="row">Nombre de la Categoría</td>
                 <td scope="row">
                     <!-- Botones de edición y eliminación con iconos -->
-                    <button type="button" class="btn btn-outline-success"><i class="fas fa-pencil-alt"></i></button>
-                    <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                    <button type="button" class="btn btn-outline-success btn-sm"><i class="fas fa-pencil-alt"></i></button>
+                    <button type="button" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                 </td>
             </tr>
             <!-- Fin del ejemplo de fila -->

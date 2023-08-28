@@ -5,12 +5,12 @@
         <!-- Encabezado de la tabla -->
         <thead class="table-dark">
             <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Imagen</th>
-                <th scope="col">Categoría</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Correo Electronico</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Dui</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
