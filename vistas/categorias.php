@@ -54,6 +54,43 @@ if (isset($_SESSION['usuario'])) {
                 </div>
             </div>
         </div>
+
+
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="actualizarCategoria" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">Actualizar Categoria</h5>
+                        <br>
+                        <?php
+                        // echo print_r($_GET);
+                        ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="frmCategoriasU" action="" method="post">
+                            <input type="text" hidden name="idcategoriaU" id="idcategoriaU">
+                            <div class="mb-3">
+                                <label for="categoriaU" class="form-label">Categoria</label>
+                                <input type="text" class="form-control input-group-sm" id="categoriaU" name="categoriaU">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" id="btnActualizarCategoria" class="btn btn-outline-primary" data-bs-dismiss="modal">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Optional: Place to the bottom of scripts -->
+        <script>
+            const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
+        </script>
     </body>
 
 
@@ -99,6 +136,38 @@ if (isset($_SESSION['usuario'])) {
                 });
             });
         });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //script para evento click y ajax 
+            $('#btnActualizarCategoria').click(function() {
+
+                datos = $('#frmCategoriasU').serialize();
+                $.ajax({
+                    type: "POST",
+                    data: datos,
+                    url: "../procesos/categorias/actualizaCategoria.php",
+                    success: function(r) {
+                        if (r == 1) {
+                            // Mostrar una alerta y recargar tabla si la categoría se agregó correctamente
+                            $('#tablaCategoriaLoad').load("categorias/tablaCategorias.php");
+                            alertify.success("Actualizado con exito")
+                        } else {
+                            // Mostrar una alerta de error si no se pudo registrar la categoría
+                            alertify.error("No se actualizo la categoría");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        function agregaDato(idCategoria, categoria) {
+            $('#idcategoriaU').val(idCategoria);
+            $('#categoriaU').val(categoria);
+        }
     </script>
 
 

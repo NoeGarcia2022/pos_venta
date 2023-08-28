@@ -14,4 +14,17 @@ class Categorias
         // Retornamos nustras varibles de $conexion, $sql
         return mysqli_query($conexion, $sql);
     }
+
+    // Funcion o metodo para actualizar datos de categoria
+    public function actualizaCategoria($datos)
+    {
+        $c = new Conectar();
+        $conexion = $c->conexion();
+
+        // Sentencia sql para poder actualizar los datos 
+        $sql = "UPDATE tb_categorias set nombreCategoria='$datos[1]'
+                    WHERE id_categoria='$datos[0]'";
+
+        echo mysqli_query($conexion, $sql);
+    }
 }
