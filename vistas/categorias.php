@@ -90,6 +90,8 @@ if (isset($_SESSION['usuario'])) {
                             $('#tablaCategoriaLoad').load("categorias/tablaCategorias.php");
                             alertify.success("Categoría agregada con éxito");
                         } else {
+                            // limpiar formulario al no registrar categoria
+                            $('#frmCategorias')[0].reset();
                             // Mostrar una alerta de error si no se pudo registrar la categoría
                             alertify.error("No se registró la categoría");
                         }
