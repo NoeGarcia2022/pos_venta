@@ -1,3 +1,19 @@
+<?php
+// incluimos nuestra conexion
+require_once("../../clases/Conexion.php");
+
+
+// Crear una instancia de la clase Conectar y obtener la conexión
+$c = new Conectar();
+$conexion = $c->conexion();
+
+// sentencia sql para mostrar datos de categorias 
+$sql = "SELECT  id_categoria, id_usuario, nombreCategoria FROM tb_categorias ";
+
+// retornamos las variables $conexion, $sql
+$result = mysqli_query($conexion, $sql);
+?>
+
 <div class="table-responsive mt-4">
 
     <!-- Tabla con estilo de Bootstrap -->
@@ -8,30 +24,18 @@
                 <th scope="col">Id</th>
                 <th scope="col">Usuario</th>
                 <th scope="col">Categoría</th>
-                <th scope="col">FechaRegistro</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
             <!-- Ejemplo de una fila de categoría (puedes repetir esta estructura dinámicamente) -->
             <?php
-            // incluimos nuestra conexion
-            require_once("../../clases/Conexion.php");
-
-            // Crear una instancia de la clase Conectar y obtener la conexión
-            $c = new Conectar();
-            $conexion = $c->conexion();
-
-            $sql = $conexion->query("SELECT * FROM tb_categorias
-            INNER JOIN tb_usuarios ON tb_categorias.id_usuario = tb_categorias.id_usuario");
-
-            while ($resultado = $sql->fetch_assoc()) {
+            while ($ver = mysqli_fetch_row($result)) :
             ?>
                 <tr>
-                    <td scope="row"><?php echo $resultado['id_categoria'] ?></td>
-                    <td scope="row"><?php echo $resultado['nombre'] ?></td>
-                    <td scope="row"><?php echo $resultado['nombreCategoria'] ?></td>
-                    <td scope="row"><?php echo $resultado['fechaCaptura'] ?></td>
+                    <td scope="row"><?php echo $ver[0]; ?></td>
+                    <td scope="row"><?php echo $ver[1]; ?></td>
+                    <td scope="row"><?php echo $ver[2]; ?></td>
                     <td scope="row">
                         <!-- Botones de edición y eliminación con iconos -->
                         <button type="button" class="btn btn-outline-success btn-sm"><i class="fas fa-pencil-alt"></i></button>
@@ -39,9 +43,9 @@
                     </td>
                 </tr>
                 <!-- Fin del ejemplo de fila -->
-            <?php
-            }
-            ?>
         </tbody>
+    <?php
+            endwhile;
+    ?>
     </table>
 </div>
