@@ -20,8 +20,15 @@ if (isset($_SESSION['usuario'])) {
     </head>
 
     <header>
-        <?php
-        require_once("menu.php");
+        <?php require_once("menu.php"); ?>
+        <!-- incluimos nuestra conexion -->
+        <?php require_once("../clases/Conexion.php");
+        // instanciamos nuestra conexion
+        $c = new Conectar();
+        $conexion = $c->conexion();
+
+        $sql = "SELECT id_categoria,nombreCategoria FROM tb_categorias";
+        $result = mysqli_query($conexion, $sql);
         ?>
     </header>
 
@@ -41,6 +48,13 @@ if (isset($_SESSION['usuario'])) {
                             <label for="" class="form-label">Categoria</label>
                             <select class="form-select form-select-sm" name="categoriaSelect" id="categoriaSelect">
                                 <option selected value="A" disabled>Seleccione una categoria</option>
+                                <?php
+                                while ($ver = mysqli_fetch_row($result)) : ?>
+                                    <option value="<?php echo $ver[0] ?>"><?php echo $ver[1]; ?>
+                                    </option>
+                                <?php
+                                endwhile;
+                                ?>
                             </select>
                         </div>
                         <div class="">
@@ -49,7 +63,7 @@ if (isset($_SESSION['usuario'])) {
                         </div>
                         <div class="">
                             <label for="descripcion" class="form-label">Descripcion</label>
-                            <input type="text" class="form-control form-control-sm" id="descripcion" name="descripcion">
+                            <textarea class="form-control" id="descripcion" name="descripcion" rows="2"></textarea>
                         </div>
                         <div class="">
                             <label for="cantidad" class="form-label">Cantidad</label>
@@ -95,20 +109,40 @@ if (isset($_SESSION['usuario'])) {
                     return false;
                 }
 
-                // Serializar los datos del formulario y enviarlos mediante AJAX
-                datos = $('#frmArticulos').serialize();
+                // Crear un objeto FormData a partir del formulario con el id "frmArticulos"
+                var formData = new FormData(document.getElementById("frmArticulos"));
+                // Realizar una solicitud AJAX utilizando jQuery
                 $.ajax({
-                    type: "POST",
-                    data: datos,
-                    url: "../procesos/articulos/agregaArticulo.php",
+                    // URL a la que se enviará la solicitud
+                    url: "../procesos/articulos/insertaArticulos.php",
+                    // Tipo de solicitud (POST en este caso)
+                    type: "post",
+                    // Tipo de datos esperados en la respuesta (HTML en este caso)
+                    dataType: "html",
+                    // Datos que se enviarán con la solicitud (FormData con los datos del formulario)
+                    data: formData,
+                    // Evitar el almacenamiento en caché de la respuesta del servidor
+                    cache: false,
+                    // No configurar automáticamente el tipo de contenido de la solicitud
+                    contentType: false,
+                    // No procesar automáticamente los datos enviados
+                    processData: false,
+                    // Función que se ejecuta cuando la solicitud es exitosa
                     success: function(r) {
+                        // alert(r);
+                        // console.log(r);
+                        // Comprobar si la respuesta del servidor es igual a 1
                         if (r == 1) {
-                            // Mostrar una alerta de éxito si el articulo se agregó correctamente
+                            // Restablecer el formulario con id "frm"
+                            $('#frmArticulos')[0].reset();
+                            // Cargar una tabla de artículos desde "articulos/tablaArticulos.php"
                             $('#tablaArticuloLoad').load("articulos/tablaArticulos.php");
-                            alertify.success("Producto agregado con éxito");
+                            // Mostrar un mensaje de éxito utilizando la librería "alertify"
+                            alertify.success("Agregado con éxito :D");
                         } else {
-                            // Mostrar una alerta de error si no se pudo registrar el articulo
-                            alertify.error("No se registró el producto");
+                            $('#frmArticulos')[0].reset();
+                            // Mostrar un mensaje de error utilizando la librería "alertify"
+                            alertify.error("Fallo al subir el archivo :(");
                         }
                     }
                 });
