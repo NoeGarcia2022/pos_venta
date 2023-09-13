@@ -35,13 +35,13 @@ if (isset($_SESSION['usuario'])) {
     <body>
         <!-- Contenedor principal -->
         <div class="container-fluid mt-3">
-            <h1 class="text-center bg-warning">PRODUCTOS</h1>
         </div>
-        <div class="container mt-2">
+        <div class="container mt-2 ">
             <div class="row">
-                <div class="col-sm-4 mt-4">
+                <div class="col-sm-4">
+                    <h5 class="text-center bg-info">Formulario Productos</h5>
                     <!-- Formulario para agregar productos -->
-                    <form id="frmArticulos" action="" method="post" class="form-control" enctype="multipart/form-data">
+                    <form id="frmArticulos" action="" method="post" class="form-control mb-4" enctype="multipart/form-data">
                         <h3>Formulario Productos</h3>
                         <hr>
                         <div class="mb-2">
@@ -82,6 +82,7 @@ if (isset($_SESSION['usuario'])) {
                     </form>
                 </div>
                 <div class="col-sm-8">
+                    <h5 class="text-center bg-info">Lista Productos</h5>
                     <!-- Espacio para mostrar la tabla de articulos cargada dinámicamente -->
                     <div id="tablaArticuloLoad">
                     </div>
