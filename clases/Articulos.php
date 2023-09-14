@@ -44,5 +44,76 @@ class Articulos
         // Ejecutar la consulta SQL y retornar el resultado (true/false)
         return mysqli_query($conexion, $sql);
     }
+
+    public function obtenDatosArticulo($idArticulo) {
+        // Crea una instancia de la clase Conectar (asumiendo que existe)
+        $c = new Conectar();
+        // Establece una conexión a la base de datos
+        $conexion = $c->conexion();
+    
+        // Consulta SQL para obtener los datos del artículo
+        $sql = "SELECT id_producto, id_categoria, nombre, descripcion, cantidad, precio 
+                FROM tb_articulos WHERE id_producto='$idArticulo'";
+        
+        // Ejecuta la consulta SQL
+        $result = mysqli_query($conexion, $sql);
+    
+        // Verifica si se encontraron resultados
+        if (!$result) {
+            // Maneja el error si la consulta no se ejecuta correctamente
+            return array('error' => 'Error en la consulta SQL');
+        }
+    
+        // Obtiene la primera fila de resultados
+        $ver = mysqli_fetch_assoc($result);
+    
+        // Verifica si se encontraron resultados válidos
+        if (!$ver) {
+            // Maneja el caso en el que no se encontraron datos para el artículo
+            return array('error' => 'No se encontraron datos para el artículo');
+        }
+    
+        // Crea un arreglo asociativo con los datos del artículo
+        $datos = array(
+            "id_producto" => $ver['id_producto'],
+            "id_categoria" => $ver['id_categoria'],
+            "nombre" => $ver['nombre'],
+            "descripcion" => $ver['descripcion'],
+            "cantidad" => $ver['cantidad'],
+            "precio" => $ver['precio']
+        );
+    
+        // Devuelve los datos del artículo en un formato JSON
+        return $datos;
+    }
+    
+
+    public function actualizaArticulo($datos) {
+        // Crea una instancia de la clase Conectar (asumiendo que existe)
+        $c = new Conectar();
+        // Establece una conexión a la base de datos
+        $conexion = $c->conexion();
+    
+        // Preparar los datos para evitar SQL injection
+        $idProducto = mysqli_real_escape_string($conexion, $datos[0]);
+        $idCategoria = mysqli_real_escape_string($conexion, $datos[1]);
+        $nombre = mysqli_real_escape_string($conexion, $datos[2]);
+        $descripcion = mysqli_real_escape_string($conexion, $datos[3]);
+        $cantidad = mysqli_real_escape_string($conexion, $datos[4]);
+        $precio = mysqli_real_escape_string($conexion, $datos[5]);
+    
+        // Consulta SQL para actualizar el artículo
+        $sql = "UPDATE tb_articulos
+                SET id_categoria='$idCategoria', nombre='$nombre', descripcion='$descripcion', cantidad='$cantidad', precio='$precio'
+                WHERE id_producto='$idProducto'";
+    
+        // Ejecuta la consulta SQL y verifica si se ejecutó correctamente
+        if (mysqli_query($conexion, $sql)) {
+            return true; // Devuelve verdadero si la actualización fue exitosa
+        } else {
+            return false; // Devuelve falso si hubo un error en la actualización
+        }
+    }
+    
 }
 ?>

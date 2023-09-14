@@ -9,7 +9,7 @@ $c = new Conectar();
 $conexion = $c->conexion();
 
 // Consulta SQL para seleccionar datos de varias tablas utilizando INNER JOINs
-$sql = "SELECT art.id_producto, art.nombre, art.descripcion, art.cantidad, art.precio, art.fechaCaptura, img.ruta, cat.nombreCategoria, user.nombre
+$sql = "SELECT art.id_producto, art.nombre, art.descripcion, art.cantidad, art.precio, art.fechaCaptura, img.ruta, cat.nombreCategoria, user.nombre, art.id_producto
         FROM tb_articulos AS art 
         INNER JOIN tb_imagenes AS img
         ON art.id_imagen = img.id_imagen
@@ -65,12 +65,16 @@ $result = mysqli_query($conexion, $sql);
                     <td class="fs-6" scope="row"><?php echo $ver[1]; ?></td>
                     <td class="fs-6" scope="row"><?php echo $ver[2]; ?></td>
                     <td class="fs-6" scope="row"><?php echo $ver[3]; ?></td>
-                    <td class="fs-6" scope="row"><?php echo $ver[4]; ?></td>
+                    <td class="fs-6" scope="row">$ <?php echo $ver[4]; ?></td>
                     <td class="fs-6" scope="row"><?php echo $ver[5]; ?></td>
                     <td class="fs-6" scope="row">
                         <!-- Botones de edición y eliminación con iconos -->
-                        <button type="button" class="btn btn-outline-success btn-sm"><i class="fas fa-pencil-alt"></i></button>
-                        <button type="button" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#actualizaArticulo" onclick="agregaDatosArticulo('<?php echo $ver [9] ?>')">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-danger btn-sm">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </td>
                 </tr>
                 <!-- Fin del ejemplo de fila -->

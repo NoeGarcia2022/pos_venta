@@ -39,7 +39,6 @@ if (isset($_SESSION['usuario'])) {
         <div class="container mt-2 ">
             <div class="row">
                 <div class="col-sm-4">
-                    <h5 class="text-center bg-info">Formulario Productos</h5>
                     <!-- Formulario para agregar productos -->
                     <form id="frmArticulos" action="" method="post" class="form-control mb-4" enctype="multipart/form-data">
                         <h3>Formulario Productos</h3>
@@ -89,9 +88,138 @@ if (isset($_SESSION['usuario'])) {
                 </div>
             </div>
         </div>
+
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="actualizaArticulo" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">Actualizar Producto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="frmArticulosU" action="" method="post" enctype="multipart/form-data">
+                            <input type="text" hidden name="idArticulo" id="idArticulo">
+                            <div class="mb-2">
+                                <label for="categoriaSelectU" class="form-label">Categoria</label>
+                                <select class="form-select form-select-sm" name="categoriaSelectU" id="categoriaSelectU">
+                                    <?php
+                                    $sql = "SELECT id_categoria,nombreCategoria FROM tb_categorias";
+                                    $result = mysqli_query($conexion, $sql);
+                                    ?>
+                                    <option selected value="A" disabled>Seleccione una categoria</option>
+                                    <?php
+                                    while ($ver = mysqli_fetch_row($result)) : ?>
+                                        <option value="<?php echo $ver[0] ?>"><?php echo $ver[1]; ?>
+                                        </option>
+                                    <?php
+                                    endwhile;
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="">
+                                <label for="nombreU" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombreU" name="nombreU" aria-describedby="textHelp">
+                            </div>
+                            <div class="">
+                                <label for="descripcionU" class="form-label">Descripcion</label>
+                                <textarea class="form-control" id="descripcionU" name="descripcionU" rows="2"></textarea>
+                            </div>
+                            <div class="">
+                                <label for="cantidadU" class="form-label">Cantidad</label>
+                                <input type="text" class="form-control" id="cantidadU" name="cantidadU" aria-describedby="textHelp">
+                            </div>
+                            <div class="">
+                                <label for="precioU" class="form-label">Precio</label>
+                                <input type="text" class="form-control" id="precioU" name="precioU" aria-describedby="textHelp">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" id="btnActualizaArticulo" class="btn btn-outline-primary" data-bs-dismiss="modal">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Optional: Place to the bottom of scripts -->
+        <script>
+            const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
+        </script>
     </body>
 
     </html>
+
+    <script type="text/javascript">
+        // Espera a que el documento HTML se cargue completamente
+        $(document).ready(function() {
+            // Agrega un manejador de eventos al botón con ID "btnActualizaArticulo"
+            $('#btnActualizaArticulo').click(function() {
+                // Serializa los datos del formulario con ID "frmArticulosU"
+                var datos = $('#frmArticulosU').serialize();
+
+                // Realiza una solicitud Ajax POST al servidor
+                $.ajax({
+                    type: "POST",
+                    data: datos, // Envía los datos del formulario
+                    url: "../procesos/articulos/actualizaArticulos.php", // URL del servidor
+                    success: function(response) {
+                        // Muestra la respuesta del servidor en la consola para depuración
+                        console.log(response);
+
+                        // Comprueba si la respuesta es igual a 1 (éxito)
+                        if (parseInt(response) === 1) {
+                            // Recarga la tabla de artículos después de una actualización exitosa
+                            $('#tablaArticuloLoad').load("articulos/tablaArticulos.php");
+
+                            // Muestra una alerta de éxito
+                            alertify.success("Actualizado con éxito");
+                        } else {
+                            // Muestra una alerta de error si la respuesta no es igual a 1
+                            alertify.error("Error al actualizar");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // Maneja errores de la solicitud Ajax
+                        console.error(xhr.responseText);
+                        alertify.error("Error en la solicitud");
+                    }
+                });
+            });
+        });
+    </script>
+
+
+    <!-- Metodo para agregar articulo para luego actualizar -->
+    <script type="text/javascript">
+    // Esta función se llama cuando se quiere agregar datos de un artículo para su edición
+    function agregaDatosArticulo(idArticulo) {
+        // Realiza una solicitud Ajax para obtener los datos del artículo con el ID proporcionado
+        $.ajax({
+            type: "POST", // Utiliza el método POST para la solicitud
+            data: "idArt=" + idArticulo, // Envía el ID del artículo como datos
+            url: "../procesos/articulos/obtenDatosArticulos.php", // URL del servidor para obtener los datos
+            success: function(r) {
+                // La función se ejecuta si la solicitud Ajax es exitosa
+
+                // Parsea la respuesta JSON recibida del servidor
+                dato = jQuery.parseJSON(r);
+
+                // Rellena los campos del formulario con los datos del artículo
+                $('#idArticulo').val(dato['id_producto']); // Asigna el ID del producto al campo correspondiente
+                $('#categoriaSelectU').val(dato['id_categoria']); // Asigna la categoría al campo correspondiente
+                $('#nombreU').val(dato['nombre']); // Asigna el nombre del artículo al campo correspondiente
+                $('#descripcionU').val(dato['descripcion']); // Asigna la descripción al campo correspondiente
+                $('#cantidadU').val(dato['cantidad']); // Asigna la cantidad al campo correspondiente
+                $('#precioU').val(dato['precio']); // Asigna el precio al campo correspondiente
+            }
+        });
+    }
+</script>
+
 
     <script type="text/javascript">
         $(document).ready(function() {
