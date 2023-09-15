@@ -3,7 +3,7 @@
 session_start();
 
 // Verificamos si existe una variable de sesión llamada 'usuario'
-if (isset($_SESSION['usuario'])) {
+if (isset($_SESSION['usuario']) and $_SESSION['usuario'] == 'admin') {
     // Si la variable de sesión 'usuario' existe, la mostramos
     //echo $_SESSION['usuario'];
     $currentPage = "usuarios";
@@ -41,11 +41,11 @@ if (isset($_SESSION['usuario'])) {
                         </div>
                         <div class="">
                             <label for="apellidos" class="form-label">Apellidos</label>
-                            <input type="text" class="form-control form-control-sm" id="apellidos" name="apellidos">
+                            <input type="text" class="form-control form-control-sm" id="apellidos" name="apellido">
                         </div>
                         <div class="">
                             <label for="correo" class="form-label">Usuario</label>
-                            <input type="email" class="form-control form-control-sm" id="correo" name="correo">
+                            <input type="email" class="form-control form-control-sm" id="correo" name="usuario">
                         </div>
                         <div class="">
                             <label for="clave" class="form-label">Contraseña</label>
@@ -89,13 +89,17 @@ if (isset($_SESSION['usuario'])) {
                 $.ajax({
                     type: "POST",
                     data: datos,
-                    url: "../procesos/usuarios/agregaUsuario.php",
+                    url: "../procesos/registroLogin/registrarUsuario.php",
                     success: function(r) {
                         if (r == 1) {
+                            // Reset a los campos del form en caso de registrar
+                            $('#frmUsuarios')[0].reset();
                             // Mostrar una alerta de éxito si el usuario se agregó correctamente
                             $('#tablaUsuariosLoad').load("usuarios/tablaUsuarios.php");
                             alertify.success("Usuario agregado con éxito");
                         } else {
+                            // Reset a los campos del form en caso de no registrar
+                            $('#frmUsuarios')[0].reset();
                             // Mostrar una alerta de error si no se pudo registrar el usuario
                             alertify.error("No se registró el usuario");
                         }

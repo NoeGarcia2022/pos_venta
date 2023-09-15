@@ -45,12 +45,22 @@
                             <i class="fa-solid fa-table-list fa-2xs"></i> Categorias
                         </a>
                     </li>
-                    <!-- Elemento de menú: Administrar Usuarios -->
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-outline-danger btn-sm mx-1 <?php if ($currentPage == 'usuarios') echo 'active'; ?>" href="../vistas/usuarios.php">
-                            <i class="fa-solid fa-users-gear fa-2xs"></i> Administrar Usuarios
-                        </a>
-                    </li>
+                    <?php
+                    // Verifica si el usuario en la sesión actual es 'admin'.
+                    if ($_SESSION['usuario'] == "admin") :
+                    ?>
+                        <!-- Inicio del bloque condicional si el usuario es 'admin'. -->
+
+                        <!-- Elemento de menú: Administrar Usuarios -->
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-danger btn-sm mx-1 <?php if ($currentPage == 'usuarios') echo 'active'; ?>" href="../vistas/usuarios.php">
+                                <i class="fa-solid fa-users-gear fa-2xs"></i> Administrar Usuarios
+                            </a>
+                        </li>
+                    <?php
+                    // Fin del bloque condicional si el usuario es 'admin'.
+                    endif;
+                    ?>
                     <!-- Elemento de menú: Clientes -->
                     <li class="nav-item">
                         <a class="nav-link btn btn-outline-danger btn-sm mx-1 <?php if ($currentPage == 'clientes') echo 'active'; ?>" href="../vistas/clientes.php">
@@ -65,8 +75,12 @@
                     </li>
                     <!-- Elemento de menú: Usuario Logueado -->
                     <li class="nav-item dropdown">
+                        <!-- Esta línea crea un enlace HTML con varias clases CSS para estilizarlo. -->
                         <a class="nav-link dropdown-toggle btn btn-outline-danger btn-sm mx-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-user-tie fa-2xs"></i> Usuario Logueado
+                            <!-- Aquí se utiliza una etiqueta <i> para insertar un icono de usuario con la clase 'fa-user-tie' utilizando Font Awesome. -->
+                            <i class="fa-solid fa-user-tie fa-2xs"></i>
+                            <!-- En esta parte, se muestra el texto "Usuario:" seguido por el nombre de usuario almacenado en la variable de sesión 'usuario'. -->
+                            Usuario: <?php echo $_SESSION['usuario']; ?>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="../procesos/salir.php"><i class="fas fa-sign-out-alt fa-2xs"></i> SALIR</a></li>
