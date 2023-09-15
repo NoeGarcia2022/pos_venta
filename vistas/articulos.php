@@ -195,30 +195,60 @@ if (isset($_SESSION['usuario'])) {
 
     <!-- Metodo para agregar articulo para luego actualizar -->
     <script type="text/javascript">
-    // Esta función se llama cuando se quiere agregar datos de un artículo para su edición
-    function agregaDatosArticulo(idArticulo) {
-        // Realiza una solicitud Ajax para obtener los datos del artículo con el ID proporcionado
-        $.ajax({
-            type: "POST", // Utiliza el método POST para la solicitud
-            data: "idArt=" + idArticulo, // Envía el ID del artículo como datos
-            url: "../procesos/articulos/obtenDatosArticulos.php", // URL del servidor para obtener los datos
-            success: function(r) {
-                // La función se ejecuta si la solicitud Ajax es exitosa
+        // Esta función se llama cuando se quiere agregar datos de un artículo para su edición
+        function agregaDatosArticulo(idArticulo) {
+            // Realiza una solicitud Ajax para obtener los datos del artículo con el ID proporcionado
+            $.ajax({
+                type: "POST", // Utiliza el método POST para la solicitud
+                data: "idArt=" + idArticulo, // Envía el ID del artículo como datos
+                url: "../procesos/articulos/obtenDatosArticulos.php", // URL del servidor para obtener los datos
+                success: function(r) {
+                    // La función se ejecuta si la solicitud Ajax es exitosa
 
-                // Parsea la respuesta JSON recibida del servidor
-                dato = jQuery.parseJSON(r);
+                    // Parsea la respuesta JSON recibida del servidor
+                    dato = jQuery.parseJSON(r);
 
-                // Rellena los campos del formulario con los datos del artículo
-                $('#idArticulo').val(dato['id_producto']); // Asigna el ID del producto al campo correspondiente
-                $('#categoriaSelectU').val(dato['id_categoria']); // Asigna la categoría al campo correspondiente
-                $('#nombreU').val(dato['nombre']); // Asigna el nombre del artículo al campo correspondiente
-                $('#descripcionU').val(dato['descripcion']); // Asigna la descripción al campo correspondiente
-                $('#cantidadU').val(dato['cantidad']); // Asigna la cantidad al campo correspondiente
-                $('#precioU').val(dato['precio']); // Asigna el precio al campo correspondiente
-            }
-        });
-    }
-</script>
+                    // Rellena los campos del formulario con los datos del artículo
+                    $('#idArticulo').val(dato['id_producto']); // Asigna el ID del producto al campo correspondiente
+                    $('#categoriaSelectU').val(dato['id_categoria']); // Asigna la categoría al campo correspondiente
+                    $('#nombreU').val(dato['nombre']); // Asigna el nombre del artículo al campo correspondiente
+                    $('#descripcionU').val(dato['descripcion']); // Asigna la descripción al campo correspondiente
+                    $('#cantidadU').val(dato['cantidad']); // Asigna la cantidad al campo correspondiente
+                    $('#precioU').val(dato['precio']); // Asigna el precio al campo correspondiente
+                }
+            });
+        }
+
+        function eliminaArticulo(idArticulo) {
+            // Muestra un cuadro de diálogo de confirmación utilizando la librería "alertify".
+            alertify.confirm('¿Desea eliminar este producto?',
+                function() {
+                    // Cuando se confirma la eliminación, se realiza una solicitud AJAX para eliminar el producto.
+                    $.ajax({
+                        type: "POST",
+                        data: "idArticulo=" + idArticulo, // Se envía el ID del artículo como datos POST.
+                        url: "../procesos/articulos/eliminaArticulos.php", // URL del script PHP que manejará la eliminación.
+                        success: function(r) {
+                            if (r == 1) {
+                                // Si el servidor devuelve 1, significa que la eliminación fue exitosa.
+                                // Se recarga la tabla de artículos en la página actual.
+                                $('#tablaArticuloLoad').load("articulos/tablaArticulos.php");
+                                // Se muestra una notificación de éxito.
+                                alertify.success("Producto eliminado")
+                            } else {
+                                // Si el servidor no devuelve 0, significa que la eliminación no fue exitosa.
+                                // Se muestra una notificación de error.
+                                alertify.error("No se eliminó el producto");
+                            }
+                        }
+                    });
+                },
+                function() {
+                    // Si el usuario cancela la eliminación, se muestra una notificación de error.
+                    alertify.error('Canceló la operación!')
+                });
+        }
+    </script>
 
 
     <script type="text/javascript">

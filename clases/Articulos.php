@@ -45,34 +45,35 @@ class Articulos
         return mysqli_query($conexion, $sql);
     }
 
-    public function obtenDatosArticulo($idArticulo) {
+    public function obtenDatosArticulo($idArticulo)
+    {
         // Crea una instancia de la clase Conectar (asumiendo que existe)
         $c = new Conectar();
         // Establece una conexión a la base de datos
         $conexion = $c->conexion();
-    
+
         // Consulta SQL para obtener los datos del artículo
         $sql = "SELECT id_producto, id_categoria, nombre, descripcion, cantidad, precio 
                 FROM tb_articulos WHERE id_producto='$idArticulo'";
-        
+
         // Ejecuta la consulta SQL
         $result = mysqli_query($conexion, $sql);
-    
+
         // Verifica si se encontraron resultados
         if (!$result) {
             // Maneja el error si la consulta no se ejecuta correctamente
             return array('error' => 'Error en la consulta SQL');
         }
-    
+
         // Obtiene la primera fila de resultados
         $ver = mysqli_fetch_assoc($result);
-    
+
         // Verifica si se encontraron resultados válidos
         if (!$ver) {
             // Maneja el caso en el que no se encontraron datos para el artículo
             return array('error' => 'No se encontraron datos para el artículo');
         }
-    
+
         // Crea un arreglo asociativo con los datos del artículo
         $datos = array(
             "id_producto" => $ver['id_producto'],
@@ -82,18 +83,19 @@ class Articulos
             "cantidad" => $ver['cantidad'],
             "precio" => $ver['precio']
         );
-    
+
         // Devuelve los datos del artículo en un formato JSON
         return $datos;
     }
-    
 
-    public function actualizaArticulo($datos) {
+
+    public function actualizaArticulo($datos)
+    {
         // Crea una instancia de la clase Conectar (asumiendo que existe)
         $c = new Conectar();
         // Establece una conexión a la base de datos
         $conexion = $c->conexion();
-    
+
         // Preparar los datos para evitar SQL injection
         $idProducto = mysqli_real_escape_string($conexion, $datos[0]);
         $idCategoria = mysqli_real_escape_string($conexion, $datos[1]);
@@ -101,12 +103,12 @@ class Articulos
         $descripcion = mysqli_real_escape_string($conexion, $datos[3]);
         $cantidad = mysqli_real_escape_string($conexion, $datos[4]);
         $precio = mysqli_real_escape_string($conexion, $datos[5]);
-    
+
         // Consulta SQL para actualizar el artículo
         $sql = "UPDATE tb_articulos
                 SET id_categoria='$idCategoria', nombre='$nombre', descripcion='$descripcion', cantidad='$cantidad', precio='$precio'
                 WHERE id_producto='$idProducto'";
-    
+
         // Ejecuta la consulta SQL y verifica si se ejecutó correctamente
         if (mysqli_query($conexion, $sql)) {
             return true; // Devuelve verdadero si la actualización fue exitosa
@@ -114,6 +116,70 @@ class Articulos
             return false; // Devuelve falso si hubo un error en la actualización
         }
     }
-    
+
+    public function eliminaArticulo($idArticulo)
+    {
+        // Crea una instancia de la clase Conectar (asumiendo que existe)
+        $c = new Conectar();
+        // Establece una conexión a la base de datos
+        $conexion = $c->conexion();
+
+        // Obtiene el ID de la imagen asociada al artículo
+        $idImg = self::obtenIdImg($idArticulo);
+
+        // Consulta SQL para eliminar el artículo de la tabla de productos
+        $sql = "DELETE FROM tb_articulos 
+            WHERE id_producto='$idArticulo'";
+        $result = mysqli_query($conexion, $sql);
+
+        if ($result) {
+            // Si se eliminó el artículo correctamente, se procede a eliminar la imagen
+
+            // Obtiene la ruta de la imagen a partir del ID de la imagen
+            $ruta = self::obtenRutaImagen($idImg);
+
+            // Consulta SQL para eliminar la imagen de la tabla de imágenes
+            $sql = "DELETE FROM tb_imagenes WHERE id_imagen='$idImg'";
+            $result = mysqli_query($conexion, $sql);
+
+            if ($result) {
+                // Si se eliminó la imagen de la base de datos, se intenta eliminar el archivo físico de la ruta
+
+                // Intenta eliminar el archivo físico de la ruta
+                if (unlink($ruta)) {
+                    return 1; // Se retorna 1 si todo se eliminó exitosamente
+                }
+            }
+        }
+    }
+
+    public function obtenIdImg($idArticulo)
+    {
+        $c = new conectar();
+        $conexion = $c->conexion();
+
+        // Consulta SQL para obtener el ID de la imagen asociada al artículo
+        $sql = "SELECT id_imagen 
+            FROM tb_articulos 
+            WHERE id_producto='$idArticulo'";
+        $result = mysqli_query($conexion, $sql);
+
+        // Retorna el ID de la imagen
+        return mysqli_fetch_row($result)[0];
+    }
+
+    public function obtenRutaImagen($idImg)
+    {
+        $c = new conectar();
+        $conexion = $c->conexion();
+
+        // Consulta SQL para obtener la ruta de la imagen a partir del ID de la imagen
+        $sql = "SELECT ruta 
+            FROM tb_imagenes 
+            WHERE id_imagen='$idImg'";
+        $result = mysqli_query($conexion, $sql);
+
+        // Retorna la ruta de la imagen
+        return mysqli_fetch_row($result)[0];
+    }
 }
-?>
