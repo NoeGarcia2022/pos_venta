@@ -26,14 +26,13 @@ if (isset($_SESSION['usuario']) and $_SESSION['usuario'] == 'admin') {
     <body>
         <!-- Contenedor principal -->
         <div class="container-fluid mt-3">
-            <h1 class="text-center bg-warning">USUARIOS</h1>
         </div>
         <div class="container mt-2">
             <div class="row">
-                <div class="col-sm-4 mt-4">
+                <div class="col-sm-4">
                     <!-- Formulario para agregar usuarios -->
-                    <form id="frmUsuarios" action="" method="post" class="form-control" enctype="multipart/form-data">
-                    <h3>Formulario Usuarios</h3>
+                    <form id="frmUsuarios" action="" method="post" class="form-control mb-4" enctype="multipart/form-data">
+                        <h3>Formulario Usuarios</h3>
                         <hr>
                         <div class="mb-2">
                             <label for="nombre" class="form-label">Nombres</label>
@@ -57,6 +56,7 @@ if (isset($_SESSION['usuario']) and $_SESSION['usuario'] == 'admin') {
                     </form>
                 </div>
                 <div class="col-sm-8">
+                    <h5 class="text-center bg-info">Lista Usuarios</h5>
                     <!-- Espacio para mostrar la tabla de usuarios cargada dinámicamente -->
                     <div id="tablaUsuariosLoad">
                     </div>
