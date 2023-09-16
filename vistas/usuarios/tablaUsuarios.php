@@ -30,22 +30,26 @@ $result = mysqli_query($conexion, $sql);
         </thead>
         <tbody>
             <!-- Ejemplo de una fila de categoría (puedes repetir esta estructura dinámicamente) -->
-            <?php while ($ver=mysqli_fetch_row($result)): ?>
-            <tr>
-                <td scope="row"><?php echo $ver[0] ?></td>
-                <td scope="row"><?php echo $ver[1] ?></td>
-                <td scope="row"><?php echo $ver[2] ?></td>
-                <td scope="row"><?php echo $ver[3] ?></td>
-                <td scope="row"><?php echo $ver[4] ?></td>
-                <td scope="row">
-                    <!-- Botones de edición y eliminación con iconos -->
-                    <button type="button" class="btn btn-outline-success btn-sm"><i class="fas fa-pencil-alt"></i></button>
-                    <button type="button" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
-                </td>
-            </tr>
-            <!-- Fin del ejemplo de fila -->
+            <?php while ($ver = mysqli_fetch_row($result)) : ?>
+                <tr>
+                    <td scope="row"><?php echo $ver[0] ?></td>
+                    <td scope="row"><?php echo $ver[1] ?></td>
+                    <td scope="row"><?php echo $ver[2] ?></td>
+                    <td scope="row"><?php echo $ver[3] ?></td>
+                    <td scope="row"><?php echo $ver[4] ?></td>
+                    <td scope="row">
+                        <!-- Botones de edición y eliminación con iconos -->
+                        <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#actualizaUsuarios" onclick="agregaDatosUsuario('<?php echo $ver[0]; ?>')">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-danger btn-sm">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+                <!-- Fin del ejemplo de fila -->
             <?php
-                endwhile;
+            endwhile;
             ?>
         </tbody>
     </table>

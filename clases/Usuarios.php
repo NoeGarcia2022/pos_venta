@@ -68,4 +68,28 @@ class Usuarios
         // Obtener el ID del usuario y retornarlo
         return mysqli_fetch_row($result)[0];
     }
+
+    public function obtenDatosUsuarios($idUsuario)
+    {
+        // Crear una instancia de la clase Conectar y obtener la conexión
+        $c = new Conectar();
+        $conexion = $c->conexion();
+
+        $sql = "SELECT id_usuario, nombre, apellido, correo
+                    FROM tb_usuarios
+                    WHERE id_usuario='$idUsuario'";
+
+        $result = mysqli_query($conexion, $sql);
+
+        $ver = mysqli_fetch_row($result);
+
+        $datos = array(
+            'id_usuario' => $ver[0], 
+            'nombre' => $ver[1], 
+            'apellido' => $ver[2], 
+            'correo' => $ver[3]
+        );
+
+        return $datos;
+    }
 }
