@@ -104,4 +104,15 @@ class Usuarios
 
         return  mysqli_query($conexion, $sql);
     }
+
+    // Funcion para eliminar usuario
+    public function eliminarUsuario($idUsuario) {
+        $c = new Conectar();
+        $conexion = $c->conexion();
+
+        // Sentencia sql para poder eliminar los datos 
+        $sql = "DELETE FROM tb_usuarios WHERE id_usuario='$idUsuario'";
+
+        return mysqli_query($conexion, $sql);
+    }
 }

@@ -134,7 +134,7 @@ if (isset($_SESSION['usuario']) and $_SESSION['usuario'] == 'admin') {
                 $.ajax({
                     type: "POST",
                     data: datos,
-                    url: "../procesos/usuarios/actualizaArticulos.php",
+                    url: "../procesos/usuarios/actualizaUsuarios.php",
                     success: function(r) {
                         // console.log(r);
                         if (r == 1) {
@@ -149,6 +149,31 @@ if (isset($_SESSION['usuario']) and $_SESSION['usuario'] == 'admin') {
                 });
             });
         })
+
+        // funcion para eliminar un usuario
+        function eliminaUsuario(idUsuarioU) {
+            alertify.confirm('¿Desea eliminar este usuario?',
+                function() {
+                    $.ajax({
+                        type: "POST",
+                        data: "idUsuarioU=" + idUsuarioU,
+                        url: "../procesos/usuarios/eliminarUsuarios.php",
+                        success: function(r) {
+                            if (r == 1) {
+                                // Mostrar una alerta y recargar tabla si se elimino usuario correctamente
+                                $('#tablaUsuariosLoad').load("usuarios/tablaUsuarios.php");
+                                alertify.success("Usuario Eliminado")
+                            } else {
+                                // Mostrar una alerta de error si no se pudo aliminar la categoría
+                                alertify.error("No se alimino el usuario");
+                            }
+                        }
+                    });
+                },
+                function() {
+                    alertify.error('Cancelo !')
+                });
+        }
     </script>
 
     <script type="text/javascript">

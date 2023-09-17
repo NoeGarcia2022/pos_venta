@@ -42,7 +42,7 @@ $result = mysqli_query($conexion, $sql);
                         <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#actualizaUsuarios" onclick="agregaDatosUsuario('<?php echo $ver[0]; ?>')">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
-                        <button type="button" class="btn btn-outline-danger btn-sm">
+                        <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminaUsuario('<?php echo $ver[0]; ?>')">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>
