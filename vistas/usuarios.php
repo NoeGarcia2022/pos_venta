@@ -93,7 +93,7 @@ if (isset($_SESSION['usuario']) and $_SESSION['usuario'] == 'admin') {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button id="btnActualizaUsuario" type="button" class="btn btn-primary">Actualizar</button>
+                    <button id="btnActualizaUsuario" type="button" class="btn btn-primary" data-bs-dismiss="modal">Actualizar</button>
                 </div>
             </div>
         </div>
@@ -126,17 +126,25 @@ if (isset($_SESSION['usuario']) and $_SESSION['usuario'] == 'admin') {
         }
     </script>
 
+    <!-- script para poder actualizar los datos del usuario -->
     <script type="text/javascript">
         $(document).ready(function() {
             $('#btnActualizaUsuario').click(function() {
-
                 datos = $('#frmUsuariosU').serialize();
                 $.ajax({
                     type: "POST",
                     data: datos,
                     url: "../procesos/usuarios/actualizaArticulos.php",
                     success: function(r) {
-                        
+                        // console.log(r);
+                        if (r == 1) {
+                            // Mostrar una alerta de éxito si el usuario se actualizo correctamente
+                            $('#tablaUsuariosLoad').load("usuarios/tablaUsuarios.php");
+                            alertify.success("Usuario actualizado con éxito");
+                        } else {
+                            // Mostrar una alerta de error si no se pudo actualizar el usuario
+                            alertify.error("No se actualizo el usuario");
+                        }
                     }
                 });
             });

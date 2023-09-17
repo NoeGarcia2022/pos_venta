@@ -84,12 +84,24 @@ class Usuarios
         $ver = mysqli_fetch_row($result);
 
         $datos = array(
-            'id_usuario' => $ver[0], 
-            'nombre' => $ver[1], 
-            'apellido' => $ver[2], 
+            'id_usuario' => $ver[0],
+            'nombre' => $ver[1],
+            'apellido' => $ver[2],
             'correo' => $ver[3]
         );
 
         return $datos;
+    }
+
+    public function actualizarUsuarios($datos)
+    {
+        // Crear una instancia de la clase Conectar y obtener la conexión
+        $c = new Conectar();
+        $conexion = $c->conexion();
+
+        $sql = "UPDATE tb_usuarios SET nombre='$datos[1]', apellido='$datos[2]', correo='$datos[3]'
+                        WHERE id_usuario='$datos[0]'";
+
+        return  mysqli_query($conexion, $sql);
     }
 }
