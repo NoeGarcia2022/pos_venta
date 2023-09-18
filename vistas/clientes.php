@@ -29,13 +29,12 @@ if (isset($_SESSION['usuario'])) {
         <!-- Aquí puedes agregar contenido que se mostrará cuando el usuario esté autenticado -->
         <!-- Contenedor principal -->
         <div class="container-fluid mt-3">
-            <h1 class="text-center bg-warning">CLIENTES</h1>
         </div>
         <div class="container mt-2">
             <div class="row">
-                <div class="col-sm-4 mt-4">
+                <div class="col-sm-4">
                     <!-- Formulario para agregar clientes -->
-                    <form id="frmClientes" action="" method="post" class="form-control" enctype="multipart/form-data">
+                    <form id="frmClientes" action="" method="post" class="form-control mb-4" enctype="multipart/form-data">
                         <h3>Formulario Clientes</h3>
                         <hr>
                         <div class="">
@@ -68,6 +67,7 @@ if (isset($_SESSION['usuario'])) {
                     </form>
                 </div>
                 <div class="col-sm-8">
+                    <h5 class="text-center bg-info">Lista de Clientes</h5>
                     <!-- Espacio para mostrar la tabla de clientes cargada dinámicamente -->
                     <div id="tablaClientesLoad">
                     </div>
@@ -102,11 +102,15 @@ if (isset($_SESSION['usuario'])) {
                     data: datos,
                     url: "../procesos/clientes/agregaCliente.php",
                     success: function(r) {
+                        console.log(r);
                         if (r == 1) {
+                            // limpiamos form al registrar un cliente
+                            $('#frmClientes')[0].reset();
                             // Mostrar una alerta de éxito si el cliente se agregó correctamente
                             $('#tablaClientesLoad').load("clientes/tablaClientes.php");
                             alertify.success("Cliente agregado con éxito");
                         } else {
+                            $('#frmClientes')[0].reset();
                             // Mostrar una alerta de error si no se pudo registrar el cliente
                             alertify.error("No se registró el cliente");
                         }
