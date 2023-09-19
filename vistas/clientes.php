@@ -75,9 +75,61 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </div>
     </body>
+    
+    <!-- Modal para que contiene datos para actualizar cliente -->
+    <div class="modal fade" id="actualizaCliente" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Actualizar Cliente</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <form id="frmClientesU" action="" method="post" class="">
+                    <input type="text" hidden name="idClienteU" id="idClienteU">
+                        <div class="">
+                            <label for="nombreU" class="form-label">Nombres</label>
+                            <input type="text" class="form-control form-control-sm" id="nombreU" name="nombreU">
+                        </div>
+                        <div class="">
+                            <label for="apellidosU" class="form-label">Apellidos</label>
+                            <input type="text" class="form-control form-control-sm" id="apellidosU" name="apellidosU">
+                        </div>
+                        <div class="">
+                            <label for="direccionU" class="form-label">Direccion</label>
+                            <textarea class="form-control" name="direccionU" id="direccionU" rows="2"></textarea>
+                        </div>
+                        <div class="">
+                            <label for="correoU" class="form-label">Correo Electronico</label>
+                            <input type="email" class="form-control form-control-sm" id="correoU" name="correoU">
+                        </div>
+                        <div class="">
+                            <label for="telefonoU" class="form-label">Telefono</label>
+                            <input type="text" class="form-control form-control-sm" id="telefonoU" name="telefonoU">
+                        </div>
+                        <div class="">
+                            <label for="duiU" class="form-label">DUI</label>
+                            <input type="text" class="form-control form-control-sm" id="duiU" name="duiU">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button id="btnActualizaCliente" type="button" class="btn btn-primary">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- Optional: Place to the bottom of scripts -->
+    <script>
+        const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
+    </script>
 
     </html>
 
+    <!-- Script para Agregar Cliente -->
     <script type="text/javascript">
         $(document).ready(function() {
             // Cargar la tabla de clientes al cargar la página
@@ -119,6 +171,28 @@ if (isset($_SESSION['usuario'])) {
             });
         });
     </script>
+
+    <!-- script js para obtener los datos de la tabla usuarios hacia el form de actualizar -->
+    <script type="text/javascript">
+        function agregaDatosCliente(idClienteU) {
+            $.ajax({
+                type: "POST",
+                data: "idClienteU=" + idClienteU,
+                url: "../procesos/clientes/obtenDatosCliente.php",
+                success: function(r) {
+                    dato = jQuery.parseJSON(r);
+                    $('#idClienteU').val(dato['id_cliente']);
+                    $('#nombreU').val(dato['nombre']);
+                    $('#apellidosU').val(dato['apellido']);
+                    $('#direccionU').val(dato['direccion']);
+                    $('#correoU').val(dato['correo']);
+                    $('#telefonoU').val(dato['telefono']);
+                    $('#duiU').val(dato['dui']);
+                }
+            });
+        }
+    </script>
+
 
 <?php
 } else {
