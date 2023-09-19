@@ -17,7 +17,8 @@ class Clientes
     }
 
     // Funcion o metodo para obtener datos de la tabla clientes hacia form de actualizar
-    public function obtenDatosClientes($idClienteU) {
+    public function obtenDatosClientes($idClienteU)
+    {
         // Crear una instancia de la clase Conectar y obtener la conexión
         $c = new Conectar();
         $conexion = $c->conexion();
@@ -25,7 +26,7 @@ class Clientes
         $sql = "SELECT id_cliente, nombre, apellido, direccion, correo, telefono, dui
                     FROM tb_clientes
                     WHERE id_cliente = '$idClienteU'";
-        
+
         $result = mysqli_query($conexion, $sql);
 
         $ver = mysqli_fetch_row($result);
@@ -40,5 +41,18 @@ class Clientes
             'dui' => $ver[6]
         );
         return $datos;
+    }
+
+    // Funcion o metodo para actualizar un cliente
+    public function actualizarClientes($datos)
+    {
+        // Crear una instancia de la clase Conectar y obtener la conexión
+        $c = new Conectar();
+        $conexion = $c->conexion();
+
+        $sql = "UPDATE tb_clientes SET nombre='$datos[1]', apellido='$datos[2]', direccion='$datos[3]', correo='$datos[4]', telefono='$datos[5]', dui='$datos[6]'
+                    WHERE id_cliente='$datos[0]'";
+
+        return mysqli_query($conexion, $sql);
     }
 }

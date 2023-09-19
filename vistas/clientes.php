@@ -75,18 +75,18 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </div>
     </body>
-    
+
     <!-- Modal para que contiene datos para actualizar cliente -->
     <div class="modal fade" id="actualizaCliente" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalTitleId">Actualizar Cliente</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                <form id="frmClientesU" action="" method="post" class="">
-                    <input type="text" hidden name="idClienteU" id="idClienteU">
+                    <form id="frmClientesU" action="" method="post" class="">
+                        <input type="text" hidden name="idClienteU" id="idClienteU">
                         <div class="">
                             <label for="nombreU" class="form-label">Nombres</label>
                             <input type="text" class="form-control form-control-sm" id="nombreU" name="nombreU">
@@ -115,13 +115,13 @@ if (isset($_SESSION['usuario'])) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button id="btnActualizaCliente" type="button" class="btn btn-primary">Actualizar</button>
+                    <button id="btnActualizaCliente" type="button" class="btn btn-primary" data-bs-dismiss="modal">Actualizar</button>
                 </div>
             </div>
         </div>
     </div>
-    
-    
+
+
     <!-- Optional: Place to the bottom of scripts -->
     <script>
         const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
@@ -191,6 +191,31 @@ if (isset($_SESSION['usuario'])) {
                 }
             });
         }
+    </script>
+
+    <!-- script para poder actualizar los datos del cliente -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#btnActualizaCliente').click(function() {
+                datos = $('#frmClientesU').serialize();
+                $.ajax({
+                    type: "POST",
+                    data: datos,
+                    url: "../procesos/clientes/actualizaCliente.php",
+                    success: function(r) {
+                        // console.log(r);
+                        if (r == 1) {
+                            // Mostrar una alerta de éxito si el cliente se actualizo correctamente
+                            $('#tablaClientesLoad').load("clientes/tablaClientes.php");
+                            alertify.success("Cliente actualizado con éxito");
+                        } else {
+                            // Mostrar una alerta de error si no se pudo actualizar el cliente
+                            alertify.error("No se actualizo el cliente");
+                        }
+                    }
+                });
+            });
+        })
     </script>
 
 
