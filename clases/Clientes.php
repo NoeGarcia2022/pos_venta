@@ -55,4 +55,16 @@ class Clientes
 
         return mysqli_query($conexion, $sql);
     }
+
+    // Funcion o metodo para eliminar un cliente
+    public function eliminarCliente($idClienteU) {
+        // Crear una instancia de la clase Conectar y obtener la conexión
+        $c = new Conectar();
+        $conexion = $c->conexion();
+
+        // sentencia sql para eliminar los datos 
+        $sql = "DELETE FROM tb_clientes WHERE id_cliente = '$idClienteU'";
+
+        return mysqli_query($conexion, $sql);
+    }
 }

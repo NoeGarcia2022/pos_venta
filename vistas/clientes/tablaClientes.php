@@ -59,7 +59,7 @@ $result = mysqli_query($conexion, $sql);
                     <td scope="row">
                         <!-- Botones de edición y eliminación con iconos -->
                         <button type="button" class="btn btn-outline-success btn-sm"><i class="fas fa-pencil-alt" data-bs-toggle="modal" data-bs-target="#actualizaCliente" onclick="agregaDatosCliente('<?php echo $ver[0] ?>')" ></i></button>
-                        <button type="button" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminaCliente('<?php echo $ver[0] ?>')"><i class="fas fa-trash-alt"></i></button>
                     </td>
                 </tr>
                 <!-- Fin del ejemplo de fila -->

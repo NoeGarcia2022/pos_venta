@@ -218,6 +218,33 @@ if (isset($_SESSION['usuario'])) {
         })
     </script>
 
+    <!-- script para eliminar datos del cliente del base de datos -->
+    <script type="text/javascript">
+        function eliminaCliente(idClienteU) {
+            alertify.confirm('¿Desea eliminar este cliente?',
+                function() {
+                    $.ajax({
+                        type: "POST",
+                        data: "idClienteU=" + idClienteU,
+                        url: "../procesos/clientes/eliminaCliente.php",
+                        success: function(r) {
+                            if (r == 1) {
+                                // Mostrar una alerta de éxito si el cliente se elimino correctamente
+                                $('#tablaClientesLoad').load("clientes/tablaClientes.php");
+                                alertify.success("Cliente Eliminado")
+                            } else {
+                                // Mostrar una alerta de error si no se pudo aliminar la categoría
+                                alertify.error("No se alimino el cliente");
+                            }
+                        }
+                    });
+                },
+                function() {
+                    alertify.error('Cancelo !')
+                });
+        }
+    </script>
+
 
 <?php
 } else {
