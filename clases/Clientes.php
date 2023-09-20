@@ -57,7 +57,8 @@ class Clientes
     }
 
     // Funcion o metodo para eliminar un cliente
-    public function eliminarCliente($idClienteU) {
+    public function eliminarCliente($idClienteU)
+    {
         // Crear una instancia de la clase Conectar y obtener la conexión
         $c = new Conectar();
         $conexion = $c->conexion();

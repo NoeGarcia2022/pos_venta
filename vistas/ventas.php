@@ -28,7 +28,6 @@ if (isset($_SESSION['usuario'])) {
     <body>
         <!-- Aquí puedes agregar contenido que se mostrará cuando el usuario esté autenticado -->
         <div class="container mt-3">
-            <h1 class="text-center bg-warning">VENTA DE PRODUCTOS</h1>
             <div class="row">
                 <div class="col-sm-12">
                     <button type="button" id="ventaProductosBtn" class="btn btn-outline-primary">Vender producto</button>
