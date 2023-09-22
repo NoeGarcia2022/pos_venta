@@ -8,7 +8,7 @@ session_start();
 </h5>
 <!-- Agregar botón de generar venta aquí si es necesario -->
 <caption>
-    <span class="btn btn-outline-success"> Generar venta
+    <span class="btn btn-outline-success" onclick="crearVenta()"> Generar venta
         <span class="fa-solid fa-dollar-sign"></span>
     </span>
 </caption>

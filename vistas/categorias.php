@@ -28,12 +28,11 @@ if (isset($_SESSION['usuario'])) {
 
     <body>
         <div class="container-fluid mt-3">
-            <h1 class="text-center bg-warning">CATEGORIAS</h1>
         </div>
         <!-- Contenedor principal -->
         <div class="container mt-2">
             <div class="row">
-                <div class="col-sm-4 mt-4">
+                <div class="col-sm-4">
                     <!-- Formulario para agregar categorías -->
                     <form id="frmCategorias" action="" method="post" class="form-control">
                         <h3>Formulario Categorias</h3>
@@ -48,6 +47,7 @@ if (isset($_SESSION['usuario'])) {
                     </form>
                 </div>
                 <div class="col-sm-6">
+                    <h5 class="text-center bg-info">Lista Categorias</h5>
                     <!-- Espacio para mostrar la tabla de categorías cargada dinámicamente -->
                     <div id="tablaCategoriaLoad">
                     </div>

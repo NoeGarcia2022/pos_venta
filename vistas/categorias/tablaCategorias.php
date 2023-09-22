@@ -22,14 +22,18 @@
             $c = new Conectar();
             $conexion = $c->conexion();
 
-            $sql = $conexion->query("SELECT * FROM tb_categorias
-            INNER JOIN tb_usuarios ON tb_categorias.id_usuario = tb_categorias.id_usuario");
+            // $sql = $conexion->query("SELECT * FROM tb_categorias
+            // INNER JOIN tb_usuarios ON tb_categorias.id_usuario = tb_categorias.id_usuario");
+
+            $sql = $conexion->query("SELECT c.id_categoria, u.nombre AS nombreUsuario, c.nombreCategoria, c.fechaCaptura 
+                                        FROM tb_categorias c
+                                        INNER JOIN tb_usuarios u ON c.id_usuario = u.id_usuario");
 
             while ($resultado = $sql->fetch_assoc()) {
             ?>
                 <tr>
                     <td scope="row"><?php echo $resultado['id_categoria'] ?></td>
-                    <td scope="row"><?php echo $resultado['nombre'] ?></td>
+                    <td scope="row"><?php echo $resultado['nombreUsuario'] ?></td>
                     <td scope="row"><?php echo $resultado['nombreCategoria'] ?></td>
                     <td scope="row"><?php echo $resultado['fechaCaptura'] ?></td>
                     <td scope="row">

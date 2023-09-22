@@ -46,11 +46,11 @@ $conexion = $c->conexion();
             </div>
             <div class="form-group">
                 <label for="descripcionV" class="form-label">Descripción</label>
-                <textarea readonly  class="form-control" id="descripcionV" name="descripcionV" rows="2"></textarea>
+                <textarea readonly class="form-control" id="descripcionV" name="descripcionV" rows="2"></textarea>
             </div>
             <div class="form-group">
                 <label for="cantidad" class="form-label">Cantidad</label>
-                <input  readonly type="text" class="form-control input-group-sm" id="cantidad" name="cantidad">
+                <input readonly type="text" class="form-control input-group-sm" id="cantidad" name="cantidad">
             </div>
             <div class="form-group">
                 <label for="precioV" class="form-label">Precio</label>
@@ -137,14 +137,33 @@ $conexion = $c->conexion();
 <script type="text/javascript">
     function quitarP(index) {
         $.ajax({
-			type:"POST",
-			data:"ind=" + index,
-			url:"../procesos/ventas/quitarProducto.php",
-			success:function(r){
+            type: "POST",
+            data: "ind=" + index,
+            url: "../procesos/ventas/quitarProducto.php",
+            success: function(r) {
                 $('#tablaVentasTempLoad').load("ventas/tablaVentasTemp.php");
                 alertify.success("Se quito el producto");
-			}
-		});
+            }
+        });
+    }
+
+    function crearVenta() {
+        $.ajax({
+            url: "../procesos/ventas/crearVenta.php",
+            success: function(r) {
+                if (r > 0) {
+                    $('#tablaVentasTempLoad').load("ventas/tablaVentasTemp.php");
+                    $('#frmVentas')[0].reset();
+                    alertify.alert("Venta creada con exito, consulte la informacion de esta venta ventas echas");
+                } else if (r == 0) {
+                    console.log(r);
+                    alertify.alert("No hay lista de venta!");
+                }else{
+                    console.log(r);
+                    alertify.error("No se pudo crear la venta");
+                }
+            }
+        });
     }
 </script>
 
