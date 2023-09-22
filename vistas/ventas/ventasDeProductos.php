@@ -133,7 +133,20 @@ $conexion = $c->conexion();
     });
 </script>
 
-
+<!-- Script js para quitar producto de la tabla temporal -->
+<script type="text/javascript">
+    function quitarP(index) {
+        $.ajax({
+			type:"POST",
+			data:"ind=" + index,
+			url:"../procesos/ventas/quitarProducto.php",
+			success:function(r){
+                $('#tablaVentasTempLoad').load("ventas/tablaVentasTemp.php");
+                alertify.success("Se quito el producto");
+			}
+		});
+    }
+</script>
 
 <script type="text/javascript">
     $(document).ready(function() {
