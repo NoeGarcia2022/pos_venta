@@ -25,11 +25,9 @@ $result = mysqli_query($conexion, $sql);
 // Debes procesar estos resultados según tus necesidades, por ejemplo, mostrarlos en una tabla HTML.
 ?>
 
-
-<div class="table-responsive mt-4">
-
+<div class="table-responsive">
     <!-- Tabla con estilo de Bootstrap -->
-    <table class="table table-hover text-center table-bordered">
+    <table class="table table-striped table-hover table-sm text-center table-bordered">
         <!-- Encabezado de la tabla -->
         <thead class="table-dark">
             <tr>

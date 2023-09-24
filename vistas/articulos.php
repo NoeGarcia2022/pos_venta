@@ -16,7 +16,7 @@ if (isset($_SESSION['usuario'])) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Productos</title>
+        <title>Articulos</title>
     </head>
 
     <header>
@@ -34,18 +34,16 @@ if (isset($_SESSION['usuario'])) {
 
     <body>
         <!-- Contenedor principal -->
-        <div class="container-fluid mt-3">
-        </div>
-        <div class="container mt-2 ">
-            <div class="row">
-                <div class="col-sm-4">
-                    <!-- Formulario para agregar productos -->
+        <div class="container">
+            <div class="row justify-content-evenly mt-3">
+                <!-- Contenedor que contiene Formulario de Articulos -->
+                <div class="col-12 col-md-8 col-lg-4 col-xl-4 col-xxl-4">
                     <form id="frmArticulos" action="" method="post" class="form-control mb-4" enctype="multipart/form-data">
-                        <h3>Formulario Productos</h3>
+                        <h3 class="text-center"><strong>Formulario Articulos</strong></h3>
                         <hr>
                         <div class="mb-2">
-                            <label for="" class="form-label">Categoria</label>
-                            <select class="form-select form-select-sm" name="categoriaSelect" id="categoriaSelect">
+                            <label for="" class="form-label"><strong>Categoria</strong></label>
+                            <select class="form-select" name="categoriaSelect" id="categoriaSelect">
                                 <option selected value="A" disabled>Seleccione una categoria</option>
                                 <?php
                                 while ($ver = mysqli_fetch_row($result)) : ?>
@@ -56,41 +54,39 @@ if (isset($_SESSION['usuario'])) {
                                 ?>
                             </select>
                         </div>
-                        <div class="">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control form-control-sm" id="nombre" name="nombre">
+                        <div class="mb-2">
+                            <label for="nombre" class="form-label"><strong>Nombre</strong></label>
+                            <input type="text" class="form-control form-control-sm" id="nombre" name="nombre" placeholder="Ingrese nombre del articulo">
                         </div>
-                        <div class="">
-                            <label for="descripcion" class="form-label">Descripcion</label>
-                            <textarea class="form-control" id="descripcion" name="descripcion" rows="2"></textarea>
+                        <div class="mb-2">
+                            <label for="descripcion" class="form-label"><strong>Descripcion</strong></label>
+                            <textarea class="form-control" id="descripcion" name="descripcion" rows="2" placeholder="Ingrese una descripcion breve del articulo"></textarea>
                         </div>
-                        <div class="">
-                            <label for="cantidad" class="form-label">Cantidad</label>
-                            <input type="text" class="form-control form-control-sm" id="cantidad" name="cantidad">
+                        <div class="mb-2">
+                            <label for="cantidad" class="form-label"><strong>Cantidad</strong></label>
+                            <input type="text" class="form-control form-control-sm" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad de articulos">
                         </div>
-                        <div class="">
-                            <label for="precio" class="form-label">Precio</label>
-                            <input type="text" class="form-control form-control-sm" id="precio" name="precio">
+                        <div class="mb-2">
+                            <label for="precio" class="form-label"><strong>Precio</strong></label>
+                            <input type="text" class="form-control form-control-sm" id="precio" name="precio" placeholder="Ingrese el precio del articulo">
                         </div>
-                        <div class="mt-2">
+                        <div class="mt-3">
                             <input type="file" class="form-control input-group-sm" id="imagen" name="imagen">
                         </div>
-                        <div class="mt-2">
+                        <div class="mt-3 mb-2">
                             <button type="button" class="btn btn-outline-primary" id="btnAgregarArticulo">Agregar</button>
                         </div>
                     </form>
                 </div>
-                <div class="col-sm-8">
-                    <h5 class="text-center bg-info">Lista Productos</h5>
-                    <!-- Espacio para mostrar la tabla de articulos cargada dinámicamente -->
-                    <div id="tablaArticuloLoad">
-                    </div>
+                <!-- Contenedor que contiene la Tabla con la lista de Articulos -->
+                <div class="col-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
+                    <h3 class="text-center bg-info">Lista Productos</h3>
+                    <div id="tablaArticuloLoad"></div>
                 </div>
             </div>
         </div>
 
-        <!-- Modal Body -->
-        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <!-- Modal para actualizar el Articulo -->
         <div class="modal fade" id="actualizaArticulo" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                 <div class="modal-content">
@@ -143,12 +139,6 @@ if (isset($_SESSION['usuario'])) {
                 </div>
             </div>
         </div>
-
-
-        <!-- Optional: Place to the bottom of scripts -->
-        <script>
-            const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
-        </script>
     </body>
 
     </html>
@@ -191,7 +181,6 @@ if (isset($_SESSION['usuario'])) {
             });
         });
     </script>
-
 
     <!-- Metodo para agregar articulo para luego actualizar -->
     <script type="text/javascript">
@@ -249,7 +238,6 @@ if (isset($_SESSION['usuario'])) {
                 });
         }
     </script>
-
 
     <script type="text/javascript">
         $(document).ready(function() {
