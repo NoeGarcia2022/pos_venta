@@ -11,89 +11,68 @@
 </head>
 
 <body>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-secondary bg-secondary sticky-top">
         <div class="container">
-            <!-- Logo y enlace de la marca -->
-            <a class="navbar-brand" href="#">
-                <img src="../img//logo_pos_venta.png" alt="logo_pos_venta" width="30" height="30" class="d-inline-block align-text-top">
-                VENTAS Y ALMACEN
+            <a class="navbar-brand" href="../vistas/inicio.php">
+                <!-- Logo y enlace de la marca -->
+                <img src="../img//logo_pos_venta.png" alt="logo-pos-venta" width="30px" height="30px">
+                <strong>VENTAS Y ALMACEN</strong>
             </a>
-            <!-- Botón de menú desplegable para dispositivos móviles -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <!-- Botón de menu desplegable para dispositivos moviles -->
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <!-- Menú de navegación -->
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <!-- Elemento de menú: Inicio -->
+            <!-- Menu de navegacion -->
+            <div class="collapse navbar-collapse justify-content-end" id="menu">
+                <ul class="navbar-nav nav-tabs text-center">
+                    <!-- Elemento de menu: Inicio -->
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline-danger btn-sm mx-1 <?php if ($currentPage == 'inicio') echo 'active'; ?>" href="../vistas/inicio.php">
-                            <i class="fas fa-home fa-2xs"></i> Inicio
-                        </a>
+                        <a class="nav-link <?php if ($currentPage == 'inicio') echo 'active'; ?>" href="../vistas/inicio.php"><span class="fas fa-home fa-2xs"></span> Inicio</a>
                     </li>
-                    <!-- Elemento de menú: Productos -->
+                    <!-- Elemento de menu: Articulos -->
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline-danger btn-sm mx-1 <?php if ($currentPage == 'productos') echo 'active'; ?>" href="../vistas/articulos.php">
-                            <i class="fa-solid fa-table-list fa-2xs"></i> Productos
-                        </a>
+                        <a class="nav-link <?php if ($currentPage == 'productos') echo 'active'; ?>" href="../vistas/articulos.php"><span class="fa-solid fa-table-list fa-2xs"></span> Articulos</a>
                     </li>
-                    <!-- Elemento de menú: Categorías -->
+                    <!-- Elemento de menu: Categorias -->
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline-danger btn-sm mx-1 <?php if ($currentPage == 'categorias') echo 'active'; ?>" href="../vistas/categorias.php">
-                            <i class="fa-solid fa-table-list fa-2xs"></i> Categorias
-                        </a>
+                        <a class="nav-link <?php if ($currentPage == 'categorias') echo 'active'; ?>" href="../vistas/categorias.php"><span class="fa-solid fa-table-list fa-2xs"></span> Categorias</a>
                     </li>
                     <?php
                     // Verifica si el usuario en la sesión actual es 'admin'.
                     if ($_SESSION['usuario'] == "admin") :
                     ?>
                         <!-- Inicio del bloque condicional si el usuario es 'admin'. -->
-
-                        <!-- Elemento de menú: Administrar Usuarios -->
+                        <!-- Elemento de menu: Administrar Usuarios -->
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-danger btn-sm mx-1 <?php if ($currentPage == 'usuarios') echo 'active'; ?>" href="../vistas/usuarios.php">
-                                <i class="fa-solid fa-users-gear fa-2xs"></i> Administrar Usuarios
-                            </a>
+                            <a class="nav-link <?php if ($currentPage == 'usuarios') echo 'active'; ?>" href="../vistas/usuarios.php"><span class="fa-solid fa-users-gear fa-2xs"></span> Administar Usuarios</a>
                         </li>
                     <?php
                     // Fin del bloque condicional si el usuario es 'admin'.
                     endif;
                     ?>
-                    <!-- Elemento de menú: Clientes -->
+                    <!-- Elemento de menu: Clientes -->
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline-danger btn-sm mx-1 <?php if ($currentPage == 'clientes') echo 'active'; ?>" href="../vistas/clientes.php">
-                            <i class="fa-solid fa-users-between-lines fa-2xs"></i> Clientes
-                        </a>
+                        <a class="nav-link <?php if ($currentPage == 'clientes') echo 'active'; ?>" href="../vistas/clientes.php"><span class="fa-solid fa-users-between-lines fa-2xs"></span> Clientes</a>
                     </li>
-                    <!-- Elemento de menú: Vender Artículo -->
+                    <!-- Elemento de menu: Vender Articulo -->
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline-danger btn-sm mx-1 <?php if ($currentPage == 'ventas') echo 'active'; ?>" href="../vistas/ventas.php">
-                            <i class="fas fa-tag me-2 fa-2xs"></i>Vender Articulo
-                        </a>
+                        <a class="nav-link <?php if ($currentPage == 'ventas') echo 'active'; ?>" href="../vistas/ventas.php"><span class="fas fa-tag me-2 fa-2xs"></span>Vender Articulo</a>
                     </li>
-                    <!-- Elemento de menú: Usuario Logueado -->
+                    <!-- Elemento menu: Usuario Logueado -->
                     <li class="nav-item dropdown">
-                        <!-- Esta línea crea un enlace HTML con varias clases CSS para estilizarlo. -->
-                        <a class="nav-link dropdown-toggle btn btn-outline-danger btn-sm mx-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <!-- Aquí se utiliza una etiqueta <i> para insertar un icono de usuario con la clase 'fa-user-tie' utilizando Font Awesome. -->
-                            <i class="fa-solid fa-user-tie fa-2xs"></i>
-                            <!-- En esta parte, se muestra el texto "Usuario:" seguido por el nombre de usuario almacenado en la variable de sesión 'usuario'. -->
-                            Usuario: <?php echo $_SESSION['usuario']; ?>
+                        <a class="nav-link dropdown-toggle btn" data-bs-toggle="dropdown"><span class="fa-solid fa-user-tie fa-2xs"></span> Usuario: <?php echo $_SESSION['usuario']; ?>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="../procesos/salir.php"><i class="fas fa-sign-out-alt fa-2xs"></i> SALIR</a></li>
+                        <ul class="dropdown-menu text-center">
+                            <!-- Elemento de menu: Salir -->
+                            <li>
+                                <a class="dropdown-item" href="../procesos/salir.php"><span class="fas fa-sign-out-alt fa-2xs"></span> SALIR</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
-
-
-
 </body>
 
 </html>
