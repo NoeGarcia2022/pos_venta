@@ -21,7 +21,6 @@ if (mysqli_num_rows($result) > 0) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,45 +38,40 @@ if (mysqli_num_rows($result) > 0) {
     <script src="js/funciones.js"></script>
 </head>
 
-<body class="bg-dark">
-
-    <!-- Contenedor centrado para el contenido -->
-    <div class="centered">
-        <div class="col-12 col-md-6 col-lg-3"> <!-- Añade clases responsivas para adaptar el tamaño -->
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title text-center">Iniciar Sesión</h4>
-                    <div id="alertMessage" class="alert text-center" style="display: none;"></div>
+<body class="bg-info">
+    <!-- Contenedor principal que contiene el Formulario de Login -->
+    <div class="container centered">
+        <div class="row row-cols-1">
+            <div class="">
+                <form id="frmLogin" style="width: 300px;" class="form-control" action="" method="post">
+                    <h4 class="text-center"><strong>Iniciar Sesión</strong></h4>
                     <hr>
+                    <div id="alertMessage" class="alert text-center" style="display: none;"></div>
                     <div class="center-image text-center"> <!-- Centra la imagen y texto -->
-                        <img src="img/iniciar-sesion.png" width="125" class="img-fluid" alt="imagen-iniciar-session">
+                        <img src="img/iniciar-sesion.png" width="100px" height="125px" class="img-fluid" alt="imagen-iniciar-session">
                     </div>
                     <hr>
-                    <!-- Formulario de inicio de sesión -->
-                    <form id="frmLogin" action="" method="post">
-                        <div class="mb-2">
-                            <label for="usuario" class="form-label">Usuario</label>
-                            <input type="text" class="form-control" id="usuario" name="usuario" required>
-                        </div>
-                        <div class="mb-2">
-                            <label for="clave" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="clave" name="clave" required>
-                        </div>
-                        <button type="button" class="btn btn-outline-primary" id="iniciarSesion">Iniciar Sesión</button>
-                        <?php
-                        // Verificamos si la variable $validar no es verdadera (es decir, si es falsa o está vacía)
-                        if (!$validar) {
-                            // Si la validación no pasa (es decir, no existe un usuario "admin" en la base de datos),
-                            // mostramos un enlace para registrar un nuevo usuario
-                            echo '<a href="registro.php" class="btn btn-outline-success">Registrar</a>';
-                        }
-                        ?>
-                    </form>
-                </div>
+                    <div class="mb-3">
+                        <label for="usuario" class="form-label"><strong>Usuario</strong></label>
+                        <input type="text" class="form-control form-control-sm" id="usuario" name="usuario" placeholder="Ingrese su usuario" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="clave" class="form-label"><strong>Contraseña</strong></label>
+                        <input type="password" class="form-control form-control-sm" id="clave" name="clave" placeholder="Ingrese su contraseña" required>
+                    </div>
+                    <button type="button" class="btn btn-outline-primary" id="iniciarSesion">Iniciar Sesión</button>
+                    <?php
+                    // Verificamos si la variable $validar no es verdadera (es decir, si es falsa o está vacía)
+                    if (!$validar) {
+                        // Si la validación no pasa (es decir, no existe un usuario "admin" en la base de datos),
+                        // mostramos un enlace para registrar un nuevo usuario
+                        echo '<a href="registro.php" class="btn btn-outline-success">Registrar</a>';
+                    }
+                    ?>
+                </form>
             </div>
         </div>
     </div>
-
 </body>
 
 </html>
