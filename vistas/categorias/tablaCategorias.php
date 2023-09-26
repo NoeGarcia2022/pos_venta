@@ -1,7 +1,7 @@
-<div class="table-responsive mt-4">
+<div class="table-responsive">
 
     <!-- Tabla con estilo de Bootstrap -->
-    <table class="table table-hover text-center table-bordered">
+    <table class="table table-striped table-hover table-sm text-center table-bordered">
         <!-- Encabezado de la tabla -->
         <thead class="table-dark">
             <tr>
@@ -38,8 +38,8 @@
                     <td scope="row"><?php echo $resultado['fechaCaptura'] ?></td>
                     <td scope="row">
                         <!-- Botones de edición y eliminación con iconos -->
-                        <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#actualizarCategoria" onclick="agregaDato('<?php echo $resultado['id_categoria'] ?>', '<?php echo $resultado['nombreCategoria'] ?>' )"><i class="fas fa-pencil-alt"></i></button>
-                        <button type="button" onclick="eliminaCategoria('<?php echo $resultado['id_categoria'] ?>')" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#actualizarCategoria" onclick="agregaDato('<?php echo $resultado['id_categoria'] ?>', '<?php echo $resultado['nombreCategoria'] ?>' )"><i class="fas fa-pencil-alt"></i></button>
+                        <button type="button" onclick="eliminaCategoria('<?php echo $resultado['id_categoria'] ?>')" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                     </td>
                 </tr>
                 <!-- Fin del ejemplo de fila -->

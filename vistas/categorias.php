@@ -27,27 +27,15 @@ if (isset($_SESSION['usuario'])) {
     </header>
 
     <body>
-        <div class="container-fluid mt-3">
-        </div>
-        <!-- Contenedor principal -->
-        <div class="container mt-2">
+        <div class="container py-3">
             <div class="row">
-                <div class="col-sm-4">
-                    <!-- Formulario para agregar categorías -->
-                    <form id="frmCategorias" action="" method="post" class="form-control">
-                        <h3>Formulario Categorias</h3>
-                        <hr>
-                        <div class="mb-3">
-                            <label for="categoria" class="form-label">Categoria</label>
-                            <input type="text" class="form-control input-group-sm" id="categoria" name="categoria">
-                        </div>
-                        <div class="mb-3">
-                            <button type="button" class="btn btn-outline-primary" id="btnAgregarCategoria">Agregar</button>
-                        </div>
-                    </form>
+                <div class="col-12">
+                    <!-- Boton Modal Nueva Categoria -->
+                    <button type="button" class="btn btn-dark btn-md" data-bs-toggle="modal" data-bs-target="#nuevaCategoria">
+                        Nueva categoria
+                    </button>
                 </div>
-                <div class="col-sm-6">
-                    <h5 class="text-center bg-info">Lista Categorias</h5>
+                <div class="col-12 py-3">
                     <!-- Espacio para mostrar la tabla de categorías cargada dinámicamente -->
                     <div id="tablaCategoriaLoad">
                     </div>
@@ -55,44 +43,60 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </div>
 
+    </body>
 
-        <!-- Modal Body -->
-        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-        <div class="modal fade" id="actualizarCategoria" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitleId">Actualizar Categoria</h5>
-                        <br>
-                        <?php
-                        // echo print_r($_GET);
-                        ?>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="frmCategoriasU" action="" method="post">
-                            <input type="text" hidden name="idcategoriaU" id="idcategoriaU">
-                            <div class="mb-3">
-                                <label for="categoriaU" class="form-label">Categoria</label>
-                                <input type="text" class="form-control input-group-sm" id="categoriaU" name="categoriaU">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" id="btnActualizarCategoria" class="btn btn-outline-primary" data-bs-dismiss="modal">Actualizar</button>
-                    </div>
+    <!-- Modal Nueva Categoria -->
+    <div class="modal fade" id="nuevaCategoria" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitleId"><strong>Nueva Categoria</strong></h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="frmCategorias" action="" method="post">
+                        <div class="mb-3">
+                            <label for="categoria" class="form-label"><strong>Categoria</strong></label>
+                            <input type="text" class="form-control input-group-sm" id="categoria" name="categoria" placeholder="Categoria">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnAgregarCategoria" class="btn btn-primary" data-bs-dismiss="modal">Agregar</button>
                 </div>
             </div>
         </div>
+    </div>
 
-
-        <!-- Optional: Place to the bottom of scripts -->
-        <script>
-            const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
-        </script>
-    </body>
-
+    <!-- Modal Actualizar Categoria -->
+    <div class="modal fade" id="actualizarCategoria" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitleId"><strong>Actualizar Categoria</strong></h4>
+                    <br>
+                    <?php
+                    // echo print_r($_GET);
+                    ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="frmCategoriasU" action="" method="post">
+                        <input type="text" hidden name="idcategoriaU" id="idcategoriaU">
+                        <div class="mb-3">
+                            <label for="categoriaU" class="form-label"><strong>Categoria</strong></label>
+                            <input type="text" class="form-control input-group-sm" id="categoriaU" name="categoriaU">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnActualizarCategoria" class="btn btn-outline-primary" data-bs-dismiss="modal">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     </html>
 
