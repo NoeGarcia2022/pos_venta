@@ -34,16 +34,33 @@ if (isset($_SESSION['usuario'])) {
 
     <body>
         <!-- Contenedor principal -->
-        <div class="container">
-            <div class="row justify-content-evenly mt-3">
-                <!-- Contenedor que contiene Formulario de Articulos -->
-                <div class="col-12 col-md-8 col-lg-4 col-xl-4 col-xxl-4">
-                    <form id="frmArticulos" action="" method="post" class="form-control mb-4" enctype="multipart/form-data">
-                        <h3 class="text-center"><strong>Formulario Articulos</strong></h3>
-                        <hr>
-                        <div class="mb-2">
+        <div class="container py-3">
+            <div class="col-12">
+                <!-- Boton Modal Nuevo Articulo -->
+                <button type="button" class="btn btn-dark btn-md" data-bs-toggle="modal" data-bs-target="#nuevoProducto">
+                    Nuevo Articulo
+                </button>
+            </div>
+            <div class="col-12 py-3">
+                <!-- Espacio para mostrar la tabla de articulos cargada dinámicamente -->
+                <div id="tablaArticuloLoad"></div>
+            </div>
+        </div>
+    </body>
+
+    <!-- Modal Nuevo Articulo -->
+    <div class="modal fade" id="nuevoProducto" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitleId"><strong>Nuevo Articulo</strong></h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="frmArticulos" action="" method="post" enctype="multipart/form-data">
+                        <div class="mb-1">
                             <label for="" class="form-label"><strong>Categoria</strong></label>
-                            <select class="form-select" name="categoriaSelect" id="categoriaSelect">
+                            <select class="form-select form-select-sm" name="categoriaSelect" id="categoriaSelect">
                                 <option selected value="A" disabled>Seleccione una categoria</option>
                                 <?php
                                 while ($ver = mysqli_fetch_row($result)) : ?>
@@ -54,92 +71,88 @@ if (isset($_SESSION['usuario'])) {
                                 ?>
                             </select>
                         </div>
-                        <div class="mb-2">
+                        <div class="mb-1">
                             <label for="nombre" class="form-label"><strong>Nombre</strong></label>
-                            <input type="text" class="form-control form-control-sm" id="nombre" name="nombre" placeholder="Ingrese nombre del articulo">
+                            <input type="text" class="form-control form-control-sm" id="nombre" name="nombre" placeholder="Nombre de articulo">
                         </div>
-                        <div class="mb-2">
+                        <div class="mb-1">
                             <label for="descripcion" class="form-label"><strong>Descripcion</strong></label>
-                            <textarea class="form-control" id="descripcion" name="descripcion" rows="2" placeholder="Ingrese una descripcion breve del articulo"></textarea>
+                            <textarea class="form-control form-control-sm" id="descripcion" name="descripcion" rows="2" placeholder="Descripcion"></textarea>
                         </div>
-                        <div class="mb-2">
+                        <div class="mb-1">
                             <label for="cantidad" class="form-label"><strong>Cantidad</strong></label>
-                            <input type="text" class="form-control form-control-sm" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad de articulos">
+                            <input type="text" class="form-control form-control-sm" id="cantidad" name="cantidad" placeholder="Cantidad">
                         </div>
-                        <div class="mb-2">
+                        <div class="mb-1">
                             <label for="precio" class="form-label"><strong>Precio</strong></label>
-                            <input type="text" class="form-control form-control-sm" id="precio" name="precio" placeholder="Ingrese el precio del articulo">
+                            <input type="text" class="form-control form-control-sm" id="precio" name="precio" placeholder="Precio">
                         </div>
                         <div class="mt-3">
                             <input type="file" class="form-control input-group-sm" id="imagen" name="imagen">
                         </div>
-                        <div class="mt-3 mb-2">
-                            <button type="button" class="btn btn-outline-primary" id="btnAgregarArticulo">Agregar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button id="btnAgregarArticulo" type="button" class="btn btn-primary" data-bs-dismiss="modal">Registrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Actualizar Articulo -->
+    <div class="modal fade" id="actualizaArticulo" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId"><strong>Actualizar Articulo</strong></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="frmArticulosU" action="" method="post" enctype="multipart/form-data">
+                        <input type="text" hidden name="idArticulo" id="idArticulo">
+                        <div class="mb-1">
+                            <label for="categoriaSelectU" class="form-label"><strong>Categoria</strong></label>
+                            <select class="form-select form-select-sm" name="categoriaSelectU" id="categoriaSelectU">
+                                <?php
+                                $sql = "SELECT id_categoria,nombreCategoria FROM tb_categorias";
+                                $result = mysqli_query($conexion, $sql);
+                                ?>
+                                <option selected value="A" disabled>Seleccione una categoria</option>
+                                <?php
+                                while ($ver = mysqli_fetch_row($result)) : ?>
+                                    <option value="<?php echo $ver[0] ?>"><?php echo $ver[1]; ?>
+                                    </option>
+                                <?php
+                                endwhile;
+                                ?>
+                            </select>
+                        </div>
+                        <div class="mb-1">
+                            <label for="nombreU" class="form-label"><strong>Nombre</strong></label>
+                            <input type="text" class="form-control form-control-sm" id="nombreU" name="nombreU" aria-describedby="textHelp">
+                        </div>
+                        <div class="mb-1">
+                            <label for="descripcionU" class="form-label"><strong>Descripcion</strong></label>
+                            <textarea class="form-control form-control-sm" id="descripcionU" name="descripcionU" rows="2"></textarea>
+                        </div>
+                        <div class="mb-1">
+                            <label for="cantidadU" class="form-label"><strong>Cantidad</strong></label>
+                            <input type="text" class="form-control form-control-sm" id="cantidadU" name="cantidadU" aria-describedby="textHelp">
+                        </div>
+                        <div class="mb-1">
+                            <label for="precioU" class="form-label"><strong>Precio</strong></label>
+                            <input type="text" class="form-control form-control-sm" id="precioU" name="precioU" aria-describedby="textHelp">
                         </div>
                     </form>
                 </div>
-                <!-- Contenedor que contiene la Tabla con la lista de Articulos -->
-                <div class="col-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
-                    <h3 class="text-center bg-info">Lista Productos</h3>
-                    <div id="tablaArticuloLoad"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnActualizaArticulo" class="btn btn-outline-primary" data-bs-dismiss="modal">Actualizar</button>
                 </div>
             </div>
         </div>
-
-        <!-- Modal para actualizar el Articulo -->
-        <div class="modal fade" id="actualizaArticulo" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitleId">Actualizar Producto</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="frmArticulosU" action="" method="post" enctype="multipart/form-data">
-                            <input type="text" hidden name="idArticulo" id="idArticulo">
-                            <div class="mb-2">
-                                <label for="categoriaSelectU" class="form-label">Categoria</label>
-                                <select class="form-select form-select-sm" name="categoriaSelectU" id="categoriaSelectU">
-                                    <?php
-                                    $sql = "SELECT id_categoria,nombreCategoria FROM tb_categorias";
-                                    $result = mysqli_query($conexion, $sql);
-                                    ?>
-                                    <option selected value="A" disabled>Seleccione una categoria</option>
-                                    <?php
-                                    while ($ver = mysqli_fetch_row($result)) : ?>
-                                        <option value="<?php echo $ver[0] ?>"><?php echo $ver[1]; ?>
-                                        </option>
-                                    <?php
-                                    endwhile;
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="">
-                                <label for="nombreU" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombreU" name="nombreU" aria-describedby="textHelp">
-                            </div>
-                            <div class="">
-                                <label for="descripcionU" class="form-label">Descripcion</label>
-                                <textarea class="form-control" id="descripcionU" name="descripcionU" rows="2"></textarea>
-                            </div>
-                            <div class="">
-                                <label for="cantidadU" class="form-label">Cantidad</label>
-                                <input type="text" class="form-control" id="cantidadU" name="cantidadU" aria-describedby="textHelp">
-                            </div>
-                            <div class="">
-                                <label for="precioU" class="form-label">Precio</label>
-                                <input type="text" class="form-control" id="precioU" name="precioU" aria-describedby="textHelp">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" id="btnActualizaArticulo" class="btn btn-outline-primary" data-bs-dismiss="modal">Actualizar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
+    </div>
 
     </html>
 
@@ -227,6 +240,7 @@ if (isset($_SESSION['usuario'])) {
                             } else {
                                 // Si el servidor no devuelve 0, significa que la eliminación no fue exitosa.
                                 // Se muestra una notificación de error.
+                                console.log(r);
                                 alertify.error("No se eliminó el producto");
                             }
                         }

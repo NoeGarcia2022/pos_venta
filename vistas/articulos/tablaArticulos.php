@@ -67,10 +67,10 @@ $result = mysqli_query($conexion, $sql);
                     <td class="fs-6" scope="row"><?php echo $ver[5]; ?></td>
                     <td class="fs-6" scope="row">
                         <!-- Botones de edición y eliminación con iconos -->
-                        <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#actualizaArticulo" onclick="agregaDatosArticulo('<?php echo $ver [9] ?>')">
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#actualizaArticulo" onclick="agregaDatosArticulo('<?php echo $ver [9] ?>')">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
-                        <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminaArticulo('<?php echo $ver [9] ?>')" >
+                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminaArticulo('<?php echo $ver [9] ?>')" >
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>
