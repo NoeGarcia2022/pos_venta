@@ -13,10 +13,10 @@ $sql = "SELECT  id_usuario, nombre, apellido, correo, fechaCaptura
 $result = mysqli_query($conexion, $sql);
 ?>
 
-<div class="table-responsive mt-4">
+<div class="table-responsive">
 
     <!-- Tabla con estilo de Bootstrap -->
-    <table class="table table-hover text-center table-bordered">
+    <table class="table table-striped table-hover table-sm text-center table-bordered">
         <!-- Encabezado de la tabla -->
         <thead class="table-dark">
             <tr>
@@ -39,10 +39,10 @@ $result = mysqli_query($conexion, $sql);
                     <td scope="row"><?php echo $ver[4] ?></td>
                     <td scope="row">
                         <!-- Botones de edición y eliminación con iconos -->
-                        <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#actualizaUsuarios" onclick="agregaDatosUsuario('<?php echo $ver[0]; ?>')">
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#actualizaUsuarios" onclick="agregaDatosUsuario('<?php echo $ver[0]; ?>')">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
-                        <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminaUsuario('<?php echo $ver[0]; ?>')">
+                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminaUsuario('<?php echo $ver[0]; ?>')">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>
