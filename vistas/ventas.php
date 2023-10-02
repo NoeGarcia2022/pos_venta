@@ -26,18 +26,17 @@ if (isset($_SESSION['usuario'])) {
     </header>
 
     <body>
-        <!-- Aquí puedes agregar contenido que se mostrará cuando el usuario esté autenticado -->
-        <div class="container mt-3">
+        <div class="container py-3">
             <div class="row">
-                <div class="col-sm-12">
-                    <button type="button" id="ventaProductosBtn" class="btn btn-outline-primary">Vender producto</button>
-                    <button type="button" id="ventasHechasBtn" class="btn btn-outline-success">Ventas hechas</button>
+                <div class="col-12">
+                    <button type="button" id="ventaProductosBtn" class="btn btn-primary">Vender producto</button>
+                    <button type="button" id="ventasHechasBtn" class="btn btn-success">Ventas hechas</button>
                 </div>
             </div>
         </div>
-        <div class="container mt-3">
+        <div class="container">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-12">
                     <div id="ventaProductos"></div>
                     <div id="ventasHechas"></div>
                 </div>

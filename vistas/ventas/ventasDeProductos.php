@@ -8,12 +8,12 @@ $conexion = $c->conexion();
 ?>
 
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-12 col-md-6 col-lg-5 col-xl-3 col-xxl-3 mb-3">
         <!-- Formulario para agregar ventas -->
         <form id="frmVentasProducto" method="post" class="form-control">
-            <h3>Vender Producto</h3>
+            <h3><strong>Vender Producto</strong></h3>
             <hr>
-            <div class="mb-1">
+            <div class="mb-2">
                 <label for="clienteVenta" class="form-label"><strong>Selecciona Cliente</strong></label>
                 <select class="form-select" name="clienteVenta" id="clienteVenta">
                     <option value="A">Selecciona</option>
@@ -33,7 +33,7 @@ $conexion = $c->conexion();
                     ?>
                 </select>
             </div>
-            <div class="mb-1">
+            <div class="mb-2">
                 <label for="productoVenta" class="form-label"><strong>Producto</strong></label>
                 <select class="form-select" name="productoVenta" id="productoVenta">
                     <option value="A">Selecciona</option>
@@ -52,17 +52,17 @@ $conexion = $c->conexion();
                     ?>
                 </select>
             </div>
-            <div class="mb-1">
+            <div class="mb-2">
                 <label for="descripcionVenta" class="form-label"><strong>Descripcion</strong></label>
-                <textarea readonly class="form-control" id="descripcionVenta" name="descripcionVenta" rows="2"></textarea>
+                <textarea readonly class="form-control form-control-sm" id="descripcionVenta" name="descripcionVenta" rows="2"></textarea>
             </div>
-            <div class="mb-1">
+            <div class="mb-2">
                 <label for="cantidadVenta" class="form-label"><strong>Cantidad</strong></label>
-                <input type="text" class="form-control" id="cantidadVenta" name="cantidadVenta" aria-describedby="textHelp">
+                <input type="text" class="form-control form-control-sm" id="cantidadVenta" name="cantidadVenta" aria-describedby="textHelp">
             </div>
-            <div class="mb-1">
+            <div class="mb-2">
                 <label for="precioVenta" class="form-label"><strong>Precio</strong></label>
-                <input readonly type="text" class="form-control" id="precioVenta" name="precioVenta" aria-describedby="textHelp">
+                <input readonly type="text" class="form-control form-control-sm" id="precioVenta" name="precioVenta" aria-describedby="textHelp">
             </div>
             <div class="mt-2">
                 <button id="btnAgregaVenta" type="button" class="btn btn-primary">Agregar</button>
@@ -70,12 +70,12 @@ $conexion = $c->conexion();
             </div>
         </form>
     </div>
-
-    <div class="col-sm-3">
+    <div class="col-12 col-md-6 col-lg-7 col-xl-3 col-xxl-3 mb-3">
+        <h4 class=""><strong>Imagen de Articulo</strong></h4>
         <div id="imgProducto"></div>
     </div>
-
-    <div class="col-sm-5">
+    <div class="col-12 col-xl-6 col-xxl-6">
+        <h4 class="bg-dark text-white"><strong>Tabla ventas temporal</strong></h4>
         <div id="tablaVentasTempLoad"></div>
     </div>
 </div>
@@ -109,7 +109,8 @@ $conexion = $c->conexion();
                     $('#imgProducto').empty();
 
                     // Agrega la imagen correspondiente al producto seleccionado
-                    $('#imgProducto').append('<img src="' + dato['ruta'] + '" id="imgP" class="img-thumbnail" width="200px" height="200px" />');
+                    // $('#imgProducto').append('<img src="' + dato['ruta'] + '" id="imgP" class="img-thumbnail" width="400px" height="400px" />');
+                    $('#imgProducto').append('<img src="' + dato['ruta'] + '" id="imgP" alt="img-articulo" style="max-width: 75%; height: auto; border: 4px solid black;" />');
                 }
             });
         });
@@ -213,10 +214,10 @@ $conexion = $c->conexion();
 </script>
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function() {
         $('#clienteVenta').select2();
         $('#productoVenta').select2();
 
-    })
-</script>
+    });
+</script> -->
