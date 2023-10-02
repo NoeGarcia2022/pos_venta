@@ -26,48 +26,15 @@ if (isset($_SESSION['usuario'])) {
     </header>
 
     <body>
-        <!-- Aquí puedes agregar contenido que se mostrará cuando el usuario esté autenticado -->
-        <!-- Contenedor principal -->
-        <div class="container-fluid mt-3">
-        </div>
-        <div class="container mt-2">
+        <div class="container py-3">
             <div class="row">
-                <div class="col-sm-4">
-                    <!-- Formulario para agregar clientes -->
-                    <form id="frmClientes" action="" method="post" class="form-control mb-4" enctype="multipart/form-data">
-                        <h3>Formulario Clientes</h3>
-                        <hr>
-                        <div class="">
-                            <label for="nombre" class="form-label">Nombres</label>
-                            <input type="text" class="form-control form-control-sm" id="nombre" name="nombre">
-                        </div>
-                        <div class="">
-                            <label for="apellidos" class="form-label">Apellidos</label>
-                            <input type="text" class="form-control form-control-sm" id="apellidos" name="apellidos">
-                        </div>
-                        <div class="">
-                            <label for="direccion" class="form-label">Direccion</label>
-                            <textarea class="form-control" name="direccion" id="direccion" rows="2"></textarea>
-                        </div>
-                        <div class="">
-                            <label for="correo" class="form-label">Correo Electronico</label>
-                            <input type="email" class="form-control form-control-sm" id="correo" name="correo">
-                        </div>
-                        <div class="">
-                            <label for="telefono" class="form-label">Telefono</label>
-                            <input type="text" class="form-control form-control-sm" id="telefono" name="telefono">
-                        </div>
-                        <div class="">
-                            <label for="dui" class="form-label">DUI</label>
-                            <input type="text" class="form-control form-control-sm" id="dui" name="dui">
-                        </div>
-                        <div class="mt-2">
-                            <button type="button" class="btn btn-outline-primary" id="btnAgregaCliente">Agregar</button>
-                        </div>
-                    </form>
+                <div class="col-12">
+                    <!-- Modal trigger button -->
+                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#registrarUsuario">
+                        Nuevo Cliente
+                    </button>
                 </div>
-                <div class="col-sm-8">
-                    <h5 class="text-center bg-info">Lista de Clientes</h5>
+                <div class="col-12 py-3">
                     <!-- Espacio para mostrar la tabla de clientes cargada dinámicamente -->
                     <div id="tablaClientesLoad">
                     </div>
@@ -75,6 +42,51 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </div>
     </body>
+
+    <!-- Modal Nuevo Cliente -->
+    <div class="modal fade" id="registrarUsuario" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId"><strong>Nuevo Cliente</strong></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario para agregar clientes -->
+                    <form id="frmClientes" action="" method="post">
+                        <div class="mb-2">
+                            <label for="nombre" class="form-label"><strong>Nombres</strong></label>
+                            <input type="text" class="form-control form-control-sm" id="nombre" name="nombre">
+                        </div>
+                        <div class="mb-2">
+                            <label for="apellidos" class="form-label"><strong>Apellidos</strong></label>
+                            <input type="text" class="form-control form-control-sm" id="apellidos" name="apellidos">
+                        </div>
+                        <div class="mb-2">
+                            <label for="direccion" class="form-label"><strong>Direccion</strong></label>
+                            <textarea class="form-control" name="direccion" id="direccion" rows="2"></textarea>
+                        </div>
+                        <div class="mb-2">
+                            <label for="correo" class="form-label"><strong>Correo Electronico</strong></label>
+                            <input type="email" class="form-control form-control-sm" id="correo" name="correo">
+                        </div>
+                        <div class="mb-2">
+                            <label for="telefono" class="form-label"><strong>Telefono</strong></label>
+                            <input type="text" class="form-control form-control-sm" id="telefono" name="telefono">
+                        </div>
+                        <div class="mb-2">
+                            <label for="dui" class="form-label"><strong>DUI</strong></label>
+                            <input type="text" class="form-control form-control-sm" id="dui" name="dui">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button id="btnAgregaCliente" type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal para que contiene datos para actualizar cliente -->
     <div class="modal fade" id="actualizaCliente" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
@@ -120,12 +132,6 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </div>
     </div>
-
-
-    <!-- Optional: Place to the bottom of scripts -->
-    <script>
-        const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
-    </script>
 
     </html>
 
