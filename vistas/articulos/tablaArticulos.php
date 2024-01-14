@@ -26,8 +26,20 @@ $result = mysqli_query($conexion, $sql);
 ?>
 
 <div class="table-responsive">
+    <div class="row justify-content-end">
+        <div class="col-8 col-sm-5 col-md-4 col-lg-4 mb-2">
+            <form id="search-form" class="form-inline">
+                <div class="input-group">
+                    <label class="input-group-text bg-dark text-white" for="search-input"><strong>Buscar:</strong></label>
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    <input type="search" class="form-control" id="search-input">
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Tabla con estilo de Bootstrap -->
-    <table class="table table-striped table-hover table-sm text-center table-bordered">
+    <table class="table table-striped table-hover table-sm table-bordered">
         <!-- Encabezado de la tabla -->
         <thead class="table-dark">
             <tr>
@@ -67,10 +79,10 @@ $result = mysqli_query($conexion, $sql);
                     <td class="fs-6" scope="row"><?php echo $ver[5]; ?></td>
                     <td class="fs-6" scope="row">
                         <!-- Botones de edición y eliminación con iconos -->
-                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#actualizaArticulo" onclick="agregaDatosArticulo('<?php echo $ver [9] ?>')">
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#actualizaArticulo" onclick="agregaDatosArticulo('<?php echo $ver[9] ?>')">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
-                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminaArticulo('<?php echo $ver [9] ?>')" >
+                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminaArticulo('<?php echo $ver[9] ?>')">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>
@@ -80,3 +92,31 @@ $result = mysqli_query($conexion, $sql);
         </tbody>
     </table>
 </div>
+
+<script>
+    $(document).ready(function() {
+        // Manejar la búsqueda en tiempo real mientras el usuario escribe
+        $("#search-input").on("input", function() {
+            searchArticles();
+        });
+
+        // Función para realizar la búsqueda y filtrar los resultados
+        function searchArticles() {
+            var searchTerm = $("#search-input").val().toLowerCase();
+            $("tbody tr").each(function() {
+                var id = $(this).find("td:eq(0)").text().toLowerCase();
+                var categoria = $(this).find("td:eq(2)").text().toLowerCase();
+                var usuario = $(this).find("td:eq(3)").text().toLowerCase();
+                var nombre = $(this).find("td:eq(4)").text().toLowerCase();
+                var precio = $(this).find("td:eq(7)").text().toLowerCase();
+                var fecha = $(this).find("td:eq(8)").text().toLowerCase();
+
+                if (id.indexOf(searchTerm) === -1 && categoria.indexOf(searchTerm) === -1 && usuario.indexOf(searchTerm) === -1 && nombre.indexOf(searchTerm) === -1 && precio.indexOf(searchTerm) === -1 && fecha.indexOf(searchTerm) === -1) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        }
+    });
+</script>

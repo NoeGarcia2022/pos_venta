@@ -12,11 +12,16 @@
 <!-- Estilos de la librería Select2 para mejorar la apariencia de elementos de selección -->
 <link rel="stylesheet" type="text/css" href="../librerias/select2/css/select2.css">
 
+<!-- Estilos de la libreria Data Tables  -->
+<link rel="stylesheet" type="text/css" href="../librerias/jquery.dataTables.min.css">
 
 <!-- Importación de scripts JavaScript -->
 
 <!-- Librería jQuery para manipulación del DOM y comunicación con el servidor -->
 <script src="../librerias/jquery.min.js"></script>
+
+<!-- Libreria JQuery de Data Tables -->
+<script src="../librerias/jquery.dataTables.min.js"></script>
 
 <!-- Scripts de Alertify para mostrar alertas y notificaciones -->
 <script src="../librerias/alertify/alertify.js"></script>

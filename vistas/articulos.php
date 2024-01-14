@@ -38,7 +38,7 @@ if (isset($_SESSION['usuario'])) {
             <div class="col-12">
                 <!-- Boton Modal Nuevo Articulo -->
                 <button type="button" class="btn btn-dark btn-md" data-bs-toggle="modal" data-bs-target="#nuevoProducto">
-                    Nuevo Articulo
+                <i class="fa-solid fa-plus"></i> Nuevo Articulo
                 </button>
             </div>
             <div class="col-12 py-3">
